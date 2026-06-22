@@ -28,12 +28,13 @@ export default function Nav() {
         .nav-logo { width: 140px; height: auto; display: block; }
 
         @media (min-width: 768px) {
-          .nav-logo { width: auto; height: 286px; }
+          .nav-logo { width: auto; height: 110px; }
         }
 
         .nav-inner {
-          padding: 0 19vw;
-          height: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -51,9 +52,10 @@ export default function Nav() {
       `}</style>
 
       <header style={{
-        background: '#ffffff',
-        height: '196px',
-        overflow: 'visible',
+        position: 'relative',
+        zIndex: 2,
+        background: 'transparent',
+        padding: '16px 0',
       }}>
         <div className="nav-inner">
           <Link href="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>

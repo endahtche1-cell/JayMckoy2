@@ -3,6 +3,7 @@ import { Fredoka, Nunito } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import SpinningBadge from '@/components/SpinningBadge'
+import StarField from '@/components/StarField'
 import './globals.css'
 
 const fredoka = Fredoka({
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${fredoka.variable} ${nunito.variable}`}>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>
+        <StarField />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

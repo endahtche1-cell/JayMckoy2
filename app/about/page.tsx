@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = { title: 'About' }
@@ -12,12 +13,16 @@ export default function AboutPage() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
-          {/* Photo */}
+          {/* Artwork */}
           <div>
-            <div className="w-full flex items-end p-6 rounded-sm"
-              style={{ background: 'var(--surface)', aspectRatio: '3/4', border: '1px solid var(--border)' }}>
-              <span className="text-xs" style={{ opacity: 0.2 }}>Photo — awaiting asset</span>
-            </div>
+            <Image
+              src="/artwork/IMG_6859.jpg"
+              alt="Jay McKoy — Plaid"
+              width={1272}
+              height={1800}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+              priority
+            />
           </div>
 
           {/* Bio */}
