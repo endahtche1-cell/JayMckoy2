@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Fredoka, Nunito } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import SpinningBadge from '@/components/SpinningBadge'
 import './globals.css'
 
 const fredoka = Fredoka({
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <SpinningBadge />
       </body>
     </html>
   )

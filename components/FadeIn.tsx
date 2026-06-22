@@ -19,6 +19,12 @@ export default function FadeIn({
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    if (!('IntersectionObserver' in window)) {
+      setVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,7 +32,11 @@ export default function FadeIn({
           observer.disconnect()
         }
       },
-      { threshold: 0.08 }
+      {
+        threshold: 0.05,
+        // Negative bottom margin — item must scroll 80px into the viewport before triggering
+        rootMargin: '0px 0px -80px 0px',
+      }
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -39,8 +49,8 @@ export default function FadeIn({
       style={{
         ...style,
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(18px)',
-        transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
+        transform: visible ? 'translateY(0)' : 'translateY(40px)',
+        transition: `opacity 1.1s ease ${delay}ms, transform 1.1s ease ${delay}ms`,
       }}
     >
       {children}
