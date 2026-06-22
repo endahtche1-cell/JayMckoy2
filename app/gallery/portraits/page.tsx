@@ -19,7 +19,7 @@ export default function PortraitsPage() {
         </p>
         <p className="text-base mb-8" style={{ opacity: 0.55, fontFamily: 'var(--font-body)' }}>
           Jay&apos;s detailed colored pencil and graphite portrait work is on its way.
-          In the meantime — see the characters gallery, or commission a piece.
+          In the meantime, see the characters gallery, or commission a piece.
         </p>
         <div className="flex gap-4 flex-wrap">
           <Link href="/gallery/characters"

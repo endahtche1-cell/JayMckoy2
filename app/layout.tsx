@@ -1,16 +1,10 @@
 import type { Metadata } from 'next'
-import { Fredoka, Nunito } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import SpinningBadge from '@/components/SpinningBadge'
 import StarField from '@/components/StarField'
 import './globals.css'
-
-const fredoka = Fredoka({
-  subsets: ['latin'],
-  variable: '--font-display',
-  weight: ['300', '400', '500', '600', '700'],
-})
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -19,7 +13,7 @@ const nunito = Nunito({
 })
 
 export const metadata: Metadata = {
-  title: { default: 'Jay McKoy', template: '%s — Jay McKoy' },
+  title: { default: 'Jay McKoy', template: '%s - Jay McKoy' },
   description: 'Artist from Bridgeport, Connecticut. Colorful, fun, an expression of black joy.',
   openGraph: {
     title: 'Jay McKoy',
@@ -32,11 +26,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${nunito.variable}`}>
+    <html lang="en" className={nunito.variable}>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>
         <StarField />
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1" style={{ display:'flex', flexDirection:'column', minHeight:0 }}>{children}</main>
         <Footer />
         <SpinningBadge />
       </body>

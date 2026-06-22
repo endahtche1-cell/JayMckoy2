@@ -65,7 +65,7 @@ export default function NewsletterSignup({ variant = 'light' }: { variant?: 'lig
       </button>
       {status === 'error' && (
         <p className="text-xs mt-1 w-full" style={{ color: '#E05C5C' }}>
-          Something went wrong — try again.
+          Something went wrong. Try again.
         </p>
       )}
     </form>

@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Bootzy TM';
+  src: url('/fonts/BootzyTM.woff2') format('woff2'),
+       url('/fonts/BootzyTM.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
   JAY McKOY BRAND PALETTE
   Derived from logo: plaid oval badge, swirly script "Jay McKoy"
@@ -16,7 +25,7 @@
   --border: #E0DBF0;
   --on-accent: #FAFAFE;
 
-  --font-display: var(--font-display, 'Fredoka', system-ui, sans-serif);
+  --font-display: 'Bootzy TM', system-ui, sans-serif;
   --font-body: var(--font-body, 'Nunito', system-ui, sans-serif);
 }
 
@@ -38,3 +47,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-4deg); }
+  50%       { transform: rotate(4deg);  }
+}
+
+
+
+/* Commission form mobile */
+@media (max-width: 640px) {
+  .commission-name-email { grid-template-columns: 1fr !important; }
+  .commission-pill-group { flex-direction: column !important; }
+  .commission-pill-group button { min-width: unset !important; width: 100% !important; }
+}

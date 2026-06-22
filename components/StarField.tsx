@@ -49,30 +49,30 @@ export default function StarField() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const onScroll = () => {
-      const scrollY = window.scrollY
-      const items = containerRef.current?.querySelectorAll<HTMLElement>('.star-item')
-      items?.forEach((el) => {
+    let raf: number
+    const tick = () => {
+      const y = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0
+      containerRef.current?.querySelectorAll<HTMLElement>('.star-item').forEach(el => {
         const base = parseFloat(el.dataset.base ?? '0')
-        // Scroll left → right: positive scroll = clockwise rotation
-        const scrollRotate = scrollY * 0.03
-        el.style.transform = `rotate(${base + scrollRotate}deg)`
+        el.style.transform = `rotate(${base + y * 0.04}deg)`
       })
+      raf = requestAnimationFrame(tick)
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
   }, [])
 
   return (
     <div
       ref={containerRef}
+      id="global-star-field"
       style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}
     >
       {placements.map((p, i) => (
         <div
           key={i}
           className="star-item"
-          data-base={p.baseRotate}
+          data-base={String(p.baseRotate)}
           style={{
             position: 'absolute',
             left: p.x,
@@ -80,7 +80,6 @@ export default function StarField() {
             width: p.size,
             height: p.size,
             transform: `rotate(${p.baseRotate}deg)`,
-            transition: 'transform 0.1s linear',
           }}
         >
           <Image

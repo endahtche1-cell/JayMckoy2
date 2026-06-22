@@ -1,35 +1,88 @@
 import type { Metadata } from 'next'
-import ContactForm from './ContactForm'
+import Link from 'next/link'
 
 export const metadata: Metadata = { title: 'Contact' }
 
 export default function ContactPage() {
   return (
-    <div className="px-6 py-16 md:px-12">
-      <div className="max-w-2xl">
-        <p className="text-xs tracking-widest uppercase mb-4" style={{ opacity: 0.35, fontFamily: 'var(--font-body)' }}>
-          Contact
+    <div style={{ position: 'relative', zIndex: 1, background: '#fff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+
+
+      <div style={{ textAlign: 'center', padding: '80px 40px', maxWidth: '560px', width: '100%' }}>
+
+        {/* Eyebrow */}
+        <p style={{
+          fontFamily: 'Courier New, monospace',
+          fontSize: '11px',
+          fontWeight: 700,
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: '#A89FD4',
+          marginBottom: '20px',
+        }}>
+          ˙⋆✮⋆˚ High-level enquiries ˚⋆✮⋆˙
         </p>
-        <h1 className="text-4xl md:text-5xl font-semibold mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-          Let&apos;s talk.
+
+        {/* Heading */}
+        <h1 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(44px, 8vw, 72px)',
+          fontWeight: 700,
+          color: '#12101A',
+          lineHeight: 1.0,
+          marginBottom: '32px',
+          letterSpacing: '-0.02em',
+        }}>
+          Get in touch.
         </h1>
-        <p className="text-base mb-12" style={{ opacity: 0.6, fontFamily: 'var(--font-body)' }}>
-          Every message goes directly to Jay. For commissions, head to the{' '}
-          <a href="/commission" style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+
+        {/* Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center', marginBottom: '32px' }}>
+          <div style={{ height: '1px', flex: 1, background: 'linear-gradient(to right, transparent, #E0DBF0)' }} />
+          <span style={{ color: '#A89FD4', fontSize: '16px' }}>★</span>
+          <div style={{ height: '1px', flex: 1, background: 'linear-gradient(to left, transparent, #E0DBF0)' }} />
+        </div>
+
+        {/* Email */}
+        <a
+          href="mailto:theejaymckoy@gmail.com"
+          style={{
+            display: 'inline-block',
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(18px, 4vw, 26px)',
+            fontWeight: 600,
+            color: '#8C2257',
+            textDecoration: 'none',
+            borderBottom: '2px solid #8C2257',
+            paddingBottom: '3px',
+            marginBottom: '40px',
+            letterSpacing: '-0.01em',
+          }}
+        >
+          theejaymckoy@gmail.com
+        </a>
+
+        {/* Supporting note */}
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: '14px',
+          color: '#888',
+          lineHeight: 1.75,
+          marginBottom: '32px',
+        }}>
+          For commissions, prints, and general enquiries, use the{' '}
+          <Link href="/commission" style={{ color: '#2AA8B0', fontWeight: 600, textDecoration: 'none', borderBottom: '1px solid #2AA8B0' }}>
             Commission page
-          </a>.
+          </Link>.
         </p>
 
-        <ContactForm />
-
-        <div className="mt-12 pt-8" style={{ borderTop: '1px solid var(--border)' }}>
-          <p className="text-xs mb-2" style={{ opacity: 0.4 }}>Prefer email?</p>
-          <a href="mailto:theejaymckoy@gmail.com"
-            className="text-sm font-semibold"
-            style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
-            theejaymckoy@gmail.com
-          </a>
+        {/* Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center' }}>
+          <div style={{ height: '1px', flex: 1, background: 'linear-gradient(to right, transparent, #E0DBF0)' }} />
+          <span style={{ color: '#6EA3D0', fontSize: '14px' }}>✦</span>
+          <div style={{ height: '1px', flex: 1, background: 'linear-gradient(to left, transparent, #E0DBF0)' }} />
         </div>
+
       </div>
     </div>
   )

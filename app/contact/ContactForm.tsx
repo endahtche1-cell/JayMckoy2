@@ -80,7 +80,7 @@ export default function ContactForm() {
           Message *
         </label>
         <textarea required rows={6} style={{ ...inputStyle, resize: 'vertical' }} value={form.message}
-          onChange={(e) => set('message', e.target.value)} placeholder="Say whatever you want — Jay reads every message." />
+          onChange={(e) => set('message', e.target.value)} placeholder="Say whatever you want. Jay reads every message." />
       </div>
 
       {status === 'error' && (

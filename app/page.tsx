@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import FadeObserver from '@/components/FadeObserver'
 
 const GAP = 20
 
 function ArtLink({ file, w, h, priority = false }: { file: string; w: number; h: number; priority?: boolean }) {
   return (
-    <Link href="/gallery/characters" style={{ display: 'block' }} className="group">
+    <Link href="/gallery/characters" style={{ display: 'block' }} className="group fade-el">
       <div style={{ overflow: 'hidden', position: 'relative', zIndex: 1 }}>
         <Image
           src={`/artwork/${file}`}
@@ -36,11 +37,67 @@ export default function HomePage() {
           margin: 0 auto;
           padding: 0 24px 80px;
         }
-        @media (max-width: 768px) {
-          .home-wrap, .bottom-wrap { padding: 8px 10px; }
+
+@media (max-width: 768px) {
+          .home-wrap, .bottom-wrap { display: none !important; }
+          .mobile-grid { display: grid !important; }
         }
+        @media (min-width: 769px) {
+          .mobile-grid { display: none !important; }
+        }
+
+        /* 4-unit grid: portraits span 1–3 units for size variety, landscape spans all 4 */
+        .mobile-grid {
+          display: none;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+          padding: 12px 12px 60px;
+          position: relative;
+          z-index: 2;
+          align-items: start;
+        }
+        .mobile-grid a {
+          display: block;
+          overflow: hidden;
+          background: #fff;
+          min-width: 0;
+        }
+        .mobile-grid a.s1 { grid-column: span 1; }
+        .mobile-grid a.s2 { grid-column: span 2; }
+        .mobile-grid a.s3 { grid-column: span 3; }
+        .mobile-grid a.s4 { grid-column: span 4; } /* landscape — full width */
+        .mobile-grid img { width: 100%; height: auto; display: block; }
       `}</style>
 
+      {/* Mobile grid — mosaic, 4-unit cols, no similar prints adjacent, 6775 last */}
+      <div className="mobile-grid">
+        {/* Row 1: Nine balanced at half (not dominating) + Curls */}
+        <Link className="s2 fade-el" href="/commission"><Image src="/artwork/IMG_6869.jpg" alt="" width={1257} height={1800} priority sizes="50vw" /></Link>
+        <Link className="s2 fade-el" href="/commission"><Image src="/artwork/IMG_6746.jpg" alt="" width={1257} height={1800} priority sizes="50vw" /></Link>
+        {/* Row 2: Purple Season large + Cherry small — separates leopard prints */}
+        <Link className="s3 fade-el" href="/commission"><Image src="/artwork/IMG_6848.jpg" alt="" width={1272} height={1800} priority sizes="75vw" /></Link>
+        <Link className="s1 fade-el" href="/commission"><Image src="/artwork/IMG_6741.jpg" alt="" width={1350} height={1800} sizes="25vw" /></Link>
+        {/* Row 3: In Bloom landscape — full width break */}
+        <Link className="s4 fade-el" href="/commission"><Image src="/artwork/IMG_6776.jpg" alt="" width={1800} height={1257} sizes="100vw" /></Link>
+        {/* Row 4: Braids small + Flower Girl large */}
+        <Link className="s1 fade-el" href="/commission"><Image src="/artwork/IMG_6743.jpg" alt="" width={1350} height={1800} sizes="25vw" /></Link>
+        <Link className="s3 fade-el" href="/commission"><Image src="/artwork/IMG_6858.jpg" alt="" width={1272} height={1800} sizes="75vw" /></Link>
+        {/* Row 5: Pink Wave + Sweet — equal */}
+        <Link className="s2 fade-el" href="/commission"><Image src="/artwork/IMG_6861.jpg" alt="" width={1272} height={1800} sizes="50vw" /></Link>
+        <Link className="s2 fade-el" href="/commission"><Image src="/artwork/IMG_6860.jpg" alt="" width={1440} height={1800} sizes="50vw" /></Link>
+        {/* Row 6: Pink Season (leopard separated) + Golden */}
+        <Link className="s3 fade-el" href="/commission"><Image src="/artwork/IMG_6849.jpg" alt="" width={1272} height={1800} sizes="75vw" /></Link>
+        <Link className="s1 fade-el" href="/commission"><Image src="/artwork/IMG_6774.jpg" alt="" width={1440} height={1800} sizes="25vw" /></Link>
+        {/* Row 7: Together + Bloom — equal */}
+        <Link className="s2 fade-el" href="/commission"><Image src="/artwork/IMG_6841.jpg" alt="" width={1272} height={1800} sizes="50vw" /></Link>
+        <Link className="s2 fade-el" href="/commission"><Image src="/artwork/IMG_6810.jpg" alt="" width={1272} height={1800} sizes="50vw" /></Link>
+        {/* Row 8: Plaid full width */}
+        <Link className="s4 fade-el" href="/commission"><Image src="/artwork/IMG_6859.jpg" alt="" width={1272} height={1800} sizes="100vw" /></Link>
+        {/* LAST: Two landscape — clean, quiet ending */}
+        <Link className="s4 fade-el" href="/commission"><Image src="/artwork/IMG_6775.jpg" alt="" width={1800} height={1350} sizes="100vw" /></Link>
+      </div>
+
+      <FadeObserver />
       <div className="home-wrap">
         <div style={{ display: 'flex', gap: GAP, alignItems: 'flex-start' }}>
 
@@ -63,7 +120,7 @@ export default function HomePage() {
                 { file: 'IMG_6861.jpg', w: 1272, h: 1800 },
               ].map((img, i) => (
                 <div key={img.file} style={{ flex: 1, overflow: 'hidden', aspectRatio: '3/4', position: 'relative', zIndex: 1 }}>
-                  <Link href="/gallery/characters" className="group" style={{ display: 'block', height: '100%' }}>
+                  <Link href="/gallery/characters" className="group fade-el" style={{ display: 'block', height: '100%' }}>
                     <Image
                       src={`/artwork/${img.file}`}
                       alt=""

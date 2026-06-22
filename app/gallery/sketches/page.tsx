@@ -12,7 +12,7 @@ export default function SketchesPage() {
         <h1 className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>Sketches</h1>
       </div>
       <p className="text-sm mb-16 max-w-sm" style={{ opacity: 0.5, fontFamily: 'var(--font-body)' }}>
-        Works in progress. Process shots. The stuff that doesn&apos;t make it to the main gallery — yet.
+        Works in progress. Process shots. The stuff that doesn&apos;t make it to the main gallery yet.
       </p>
 
       <div className="max-w-md py-16">

@@ -115,7 +115,7 @@ function StoreCard({ item }: { item: StoreItem }) {
         <button
           className="w-full py-2.5 text-sm font-bold rounded-sm"
           style={{ background: 'var(--accent)', color: '#FAFAFE', fontFamily: 'var(--font-body)' }}>
-          Add to cart — {currentPrice ? formatPrice(currentPrice) : ''}
+          Add to cart {currentPrice ? formatPrice(currentPrice) : ''}
         </button>
       )}
     </div>
@@ -133,7 +133,7 @@ export default function StoreClient() {
         <div>
           <h1 className="text-4xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>Shop</h1>
           <p className="text-sm mt-1" style={{ opacity: 0.55, fontFamily: 'var(--font-body)' }}>
-            Prints ship domestically — allow 1–2 weeks. Accepts card & Apple Pay.
+            Prints ship domestically. Allow 1–2 weeks. Accepts card & Apple Pay.
           </p>
         </div>
         <div className="flex gap-1">
@@ -177,7 +177,7 @@ export default function StoreClient() {
             Want something made just for you?
           </p>
           <p className="text-sm" style={{ opacity: 0.55, fontFamily: 'var(--font-body)' }}>
-            Jay takes commissions — personal and business.
+            Jay takes commissions, personal and business.
           </p>
         </div>
         <Link href="/commission"

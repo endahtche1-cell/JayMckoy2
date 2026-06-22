@@ -8,7 +8,7 @@ const categories = [
   {
     href: '/gallery/characters',
     label: 'Characters',
-    description: 'Flat, illustrated, Y2K-style characters — bold colour and Black joy.',
+    description: 'Flat, illustrated, Y2K-style characters, bold colour and Black joy.',
     previewFile: 'IMG_6869.jpg',
     count: 15,
   },
@@ -30,39 +30,91 @@ const categories = [
 
 export default function GalleryPage() {
   return (
-    <div className="px-6 py-16 md:px-12">
-      <h1 className="text-xs tracking-widest uppercase mb-16" style={{ opacity: 0.35, fontFamily: 'var(--font-body)' }}>
-        Gallery
-      </h1>
+    <div style={{ position: 'relative', zIndex: 1, background: '#fff', padding: '48px 60px 80px' }}>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <p style={{
+        fontFamily: 'var(--font-body)',
+        fontSize: '11px',
+        fontWeight: 700,
+        letterSpacing: '0.18em',
+        textTransform: 'uppercase',
+        color: '#000',
+        marginBottom: '40px',
+        opacity: 0.4,
+      }}>
+        Gallery
+      </p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
         {categories.map((cat) => (
-          <Link key={cat.href} href={cat.href} className="group flex flex-col">
-            <div className="relative overflow-hidden rounded-sm mb-5" style={{ aspectRatio: '4/3', background: 'var(--surface)' }}>
+          <Link key={cat.href} href={cat.href}
+            style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit' }}
+            className="group">
+
+            {/* Image */}
+            <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', background: '#F2EFF8', marginBottom: '20px' }}>
               {cat.previewFile ? (
                 <Image
                   src={`/artwork/${cat.previewFile}`}
                   alt={cat.label}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                  className="group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-xs tracking-widest uppercase" style={{ opacity: 0.3, fontFamily: 'var(--font-body)' }}>
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    opacity: 0.3,
+                  }}>
                     Coming soon
                   </p>
                 </div>
               )}
             </div>
-            <div className="flex items-baseline justify-between mb-2">
-              <h2 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>{cat.label}</h2>
+
+            {/* Text — matches reference: uppercase tracking heading, clean body */}
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '8px' }}>
+              <h2 style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '13px',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: '#000',
+              }}>
+                {cat.label}
+              </h2>
               {cat.count && (
-                <span className="text-xs" style={{ opacity: 0.4, fontFamily: 'var(--font-body)' }}>{cat.count} works</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', opacity: 0.4 }}>
+                  {cat.count} works
+                </span>
               )}
             </div>
-            <p className="text-sm" style={{ opacity: 0.55, fontFamily: 'var(--font-body)' }}>{cat.description}</p>
-            <span className="mt-3 text-xs font-bold" style={{ color: 'var(--accent)', fontFamily: 'var(--font-body)' }}>
+
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '14px',
+              fontWeight: 400,
+              color: '#333',
+              lineHeight: 1.6,
+              marginBottom: '12px',
+            }}>
+              {cat.description}
+            </p>
+
+            <span style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '12px',
+              fontWeight: 700,
+              color: 'var(--accent)',
+              letterSpacing: '0.04em',
+            }}>
               View series →
             </span>
           </Link>
