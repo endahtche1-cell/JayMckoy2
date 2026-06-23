@@ -4,16 +4,15 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 // Varied widths — NOT uniform. Each image keeps its natural aspect ratio.
+// All portrait so the wheel stays visually consistent (landscape pieces removed)
 const artworks: { file: string; w: number }[] = [
   { file: 'IMG_6848.jpg', w: 180 },
   { file: 'IMG_6869.jpg', w: 220 },
   { file: 'IMG_6741.jpg', w: 190 },
-  { file: 'IMG_6776.jpg', w: 240 },
   { file: 'IMG_6858.jpg', w: 210 },
   { file: 'IMG_6849.jpg', w: 230 },
   { file: 'IMG_6743.jpg', w: 200 },
   { file: 'IMG_6860.jpg', w: 240 },
-  { file: 'IMG_6775.jpg', w: 220 },
   { file: 'IMG_6841.jpg', w: 190 },
   { file: 'IMG_6810.jpg', w: 230 },
   { file: 'IMG_6861.jpg', w: 200 },
@@ -159,7 +158,7 @@ export default function SpinGallery() {
           }
           .fz-oval { transform: scaleY(var(--stretch)); }   /* vertical axis */
           .fz-card {
-            width: 28vw;                       /* uniform width, natural height */
+            width: 38vw;                       /* uniform width, natural height */
             margin-left: 0;
             transform: translate(-50%, -50%) rotateX(var(--a)) translateZ(var(--radius)) scaleY(calc(1 / var(--stretch))) scale(var(--s, 1));
           }

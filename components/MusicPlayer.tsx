@@ -45,13 +45,26 @@ export default function MusicPlayer() {
           right: calc(50% - 576px);
         }
         @media (max-width: 767px) {
+          /* Compact rounded-square card: title on top, vinyl + play below */
           .music-player-box {
-            top: 144px;
-            right: 16px;
+            top: 96px;
+            right: 8px;
             left: auto;
-            transform: scale(0.78);
-            transform-origin: top right;
+            transform: none;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 7px !important;
+            width: 132px;
+            padding: 11px 10px !important;
+            border-radius: 18px !important;
+            white-space: normal !important;
+            text-align: center;
           }
+          .music-player-box > div:nth-child(2) { order: -1; }   /* title/artist/progress on top */
+          .music-player-box > div:nth-child(2) p { text-align: center; }
+          .music-player-box > div:nth-child(1) { order: 0; }    /* vinyl */
+          .music-player-box > button { order: 1; }              /* play */
+          .music-player-box > div:nth-child(2) > div { width: 108px !important; }  /* progress fits card */
         }
       `}</style>
 
