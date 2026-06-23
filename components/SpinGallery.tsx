@@ -150,8 +150,8 @@ export default function SpinGallery() {
         @media (max-width: 767px) {
           .fz-stage {
             height: clamp(560px, 86vh, 900px);
-            perspective: 1050px;
-            --radius: 480px;
+            perspective: 1400px;
+            --radius: 440px;
             --stretch: 1;
             /* Smooth fade-in/out at top & bottom so cards enter cleanly (no hard cut) */
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
@@ -159,7 +159,7 @@ export default function SpinGallery() {
           }
           .fz-oval { transform: scaleY(var(--stretch)); }   /* vertical axis */
           .fz-card {
-            width: 34vw;                       /* uniform width, natural height */
+            width: 28vw;                       /* uniform width, natural height */
             margin-left: 0;
             transform: translate(-50%, -50%) rotateX(var(--a)) translateZ(var(--radius)) scaleY(calc(1 / var(--stretch))) scale(var(--s, 1));
           }
