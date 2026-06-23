@@ -62,7 +62,7 @@ export default function Nav() {
         }
         /* Hide the floating music player while the menu is open */
         body.nav-menu-open { overflow: hidden; }
-        body.nav-menu-open .music-player-box { display: none !important; }
+        body.nav-menu-open .mp-vinyl-btn { display: none !important; }
         .mob-menu {
           position: fixed;
           inset: 0;
