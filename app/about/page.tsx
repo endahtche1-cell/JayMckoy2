@@ -14,7 +14,8 @@ export default function AboutPage() {
           .about-bio { padding-top: 0 !important; }
           /* Camera sits ABOVE the title on mobile */
           .about-camera { order: -1 !important; margin-left: 0 !important; justify-content: center !important; padding-top: 0 !important; }
-          .about-canvas { padding: 90px 20px 60px !important; min-height: 0 !important; }
+          .about-canvas { padding: 16px 20px 56px !important; min-height: 0 !important; }
+          .about-camera img { width: 190px !important; }   /* smaller camera so content sits higher */
           /* Frames clutter/cover the text on narrow screens — hide them on mobile */
           .about-frames { display: none !important; }
         }
@@ -49,11 +50,15 @@ export default function AboutPage() {
                 style={{ width: 'min(420px, 100%)', height: 'auto', display: 'block', pointerEvents: 'none', userSelect: 'none' }} />
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.7, color: '#2A2A2A' }}>
+            <div style={{
+              display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '28px',
+              maxWidth: '470px', background: '#fff', border: '2px solid #8C2257',
+              borderRadius: '14px', padding: '22px 24px',
+            }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.7, color: '#2A2A2A' }}>
                 Artist born and raised in Bridgeport, Connecticut. My style is colorful, fun, and an expression of Black joy.
               </p>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.7, color: '#2A2A2A' }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.7, color: '#2A2A2A' }}>
                 Working towards putting smiles on people&apos;s faces and capturing the beautiful, whimsical sides of being Black, one piece at a time.
               </p>
             </div>
@@ -62,7 +67,7 @@ export default function AboutPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '32px' }}>
               <Link href="/commission" style={{
                 padding: '11px 26px', fontSize: '14px', fontWeight: 600,
-                fontFamily: 'var(--font-body)', background: 'transparent',
+                fontFamily: 'var(--font-body)', background: '#fafafa',
                 color: '#2AA8B0', textDecoration: 'none',
                 border: '1.5px solid #2AA8B0', borderRadius: '999px',
                 letterSpacing: '0.02em',
@@ -71,7 +76,7 @@ export default function AboutPage() {
               </Link>
               <Link href="/" style={{
                 padding: '11px 26px', fontSize: '14px', fontWeight: 600,
-                fontFamily: 'var(--font-body)', background: 'transparent',
+                fontFamily: 'var(--font-body)', background: '#fafafa',
                 color: '#8C2257', textDecoration: 'none',
                 border: '1.5px solid #8C2257', borderRadius: '999px',
                 letterSpacing: '0.02em',

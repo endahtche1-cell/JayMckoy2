@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { emailJay } from '@/lib/email-list'
 
-// TODO: wire up to an email service (e.g. Resend, Nodemailer, SendGrid)
-// Add RESEND_API_KEY (or similar) to .env.local and install the SDK
-// All messages should forward to theejaymckoy@gmail.com
-
+// Contact form: forward the message to Jay's email
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -13,19 +11,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // --- Replace this block with your email service call ---
-    // Example using Resend:
-    // const { data, error } = await resend.emails.send({
-    //   from: 'Website <noreply@jaymckoy.com>',
-    //   to: 'theejaymckoy@gmail.com',
-    //   replyTo: email,
-    //   subject: `New message: ${subject || '(no subject)'} — from ${name}`,
-    //   text: `From: ${name} <${email}>\n\n${message}`,
-    // })
-    // if (error) throw error
-    // --- End block ---
-
-    console.log('Contact form submission:', { name, email, subject, message })
+    await emailJay(
+      `New message: ${subject || '(no subject)'} — from ${name}`,
+      `From: ${name} <${email}>\n\n${message}`,
+      email,
+    )
 
     return NextResponse.json({ ok: true })
   } catch (err) {

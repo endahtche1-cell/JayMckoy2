@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { addToMailchimp, emailJay } from '@/lib/email-list'
 
-// TODO: wire up to email service — same setup as /api/contact
-// Commission requests forward to theejaymckoy@gmail.com
-
+// Commission requests: add the person to the Mailchimp audience + email Jay
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -12,26 +11,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // --- Replace this block with your email service call ---
-    // const emailBody = [
-    //   `Commission request from ${name} <${email}>`,
-    //   `Use: ${use}`,
-    //   `Figures: ${figures}`,
-    //   `Background: ${background === 'yes' ? 'With background' : 'No background'}`,
-    //   `\nDescription:\n${description}`,
-    //   references ? `\nReferences: ${references}` : '',
-    // ].filter(Boolean).join('\n')
-    //
-    // await resend.emails.send({
-    //   from: 'Website <noreply@jaymckoy.com>',
-    //   to: 'theejaymckoy@gmail.com',
-    //   replyTo: email,
-    //   subject: `Commission request from ${name}`,
-    //   text: emailBody,
-    // })
-    // --- End block ---
+    const emailBody = [
+      `Commission request from ${name} <${email}>`,
+      ``,
+      `Use: ${use}`,
+      `Figures: ${figures}`,
+      `Background: ${background === 'yes' ? 'With background' : 'No background'}`,
+      ``,
+      `Description:`,
+      description,
+      references ? `\nReferences: ${references}` : '',
+    ].filter(Boolean).join('\n')
 
-    console.log('Commission request:', { name, email, use, figures, background, description, references })
+    // Run both; don't let one failure block the other
+    await Promise.allSettled([
+      addToMailchimp(email, name, 'Commission Enquiry'),
+      emailJay(`Commission request from ${name}`, emailBody, email),
+    ])
 
     return NextResponse.json({ ok: true })
   } catch (err) {

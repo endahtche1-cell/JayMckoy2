@@ -197,6 +197,8 @@ export default function Studio() {
         #global-star-field { display: none !important; }
         /* Lighten the global page header while on Studio (logo kept full size) */
         header { padding: 6px 0 !important; }
+        /* Hide the floating vinyl player here — it overlaps the studio controls */
+        .mp-vinyl-btn { display: none !important; }
         /* Tab styling — light + minimal */
         .st-tab { transition: color .15s, border-color .15s; }
         .st-tab:hover { color: #555 !important; }
