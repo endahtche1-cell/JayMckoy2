@@ -19,6 +19,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jaymckoy.com'),
   title: { default: 'Jay McKoy', template: '%s - Jay McKoy' },
   description: 'Artist from Bridgeport, Connecticut. Colorful, fun, an expression of black joy.',
   openGraph: {
@@ -27,6 +28,13 @@ export const metadata: Metadata = {
     url: 'https://jaymckoy.com',
     siteName: 'Jay McKoy',
     type: 'website',
+    images: [{ url: '/og-image.jpg', width: 900, height: 1273, alt: 'Jay McKoy artwork' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Jay McKoy',
+    description: 'Artist from Bridgeport, Connecticut. Colorful, fun, an expression of black joy.',
+    images: ['/og-image.jpg'],
   },
 }
 
