@@ -53,7 +53,7 @@ export default function SpinGallery() {
       const r = ringRef.current
       if (r) {
         r.style.transform = axis.current === 'x'
-          ? `rotateX(${-angle.current}deg)`
+          ? `rotateX(${angle.current}deg)`
           : `rotateY(${angle.current}deg)`
       }
       raf = requestAnimationFrame(tick)
@@ -151,22 +151,17 @@ export default function SpinGallery() {
           .fz-stage {
             height: clamp(560px, 86vh, 900px);
             perspective: 1050px;
-            --radius: 430px;
+            --radius: 440px;
             --stretch: 1;
           }
           .fz-oval { transform: scaleY(var(--stretch)); }   /* vertical axis */
           .fz-card {
-            width: 34vw;                       /* UNIFORM width → consistent gaps */
+            width: 34vw;                       /* uniform width, natural height */
             margin-left: 0;
             transform: translate(-50%, -50%) rotateX(var(--a)) translateZ(var(--radius)) scaleY(calc(1 / var(--stretch))) scale(var(--s, 1));
           }
-          /* Uniform box so every card occupies the same height → even spacing */
-          .fz-card img {
-            width: 100%;
-            aspect-ratio: 4 / 5;
-            height: auto;
-            object-fit: contain;               /* no cropping */
-          }
+          /* natural aspect ratio — transparent, no white letterbox/outline */
+          .fz-card img { width: 100%; height: auto; }
           .fz-card:hover { --s: 1; }
         }
       `}</style>
