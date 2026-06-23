@@ -151,8 +151,11 @@ export default function SpinGallery() {
           .fz-stage {
             height: clamp(560px, 86vh, 900px);
             perspective: 1050px;
-            --radius: 440px;
+            --radius: 480px;
             --stretch: 1;
+            /* Smooth fade-in/out at top & bottom so cards enter cleanly (no hard cut) */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
           }
           .fz-oval { transform: scaleY(var(--stretch)); }   /* vertical axis */
           .fz-card {
