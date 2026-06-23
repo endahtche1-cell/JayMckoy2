@@ -9,15 +9,15 @@ export default function CommissionPage() {
   return (
     <div style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
 
-      {/* Hero — plain white with scrapbook chrome letters */}
-      <style>{`@media (max-width: 767px){ .commission-hero { padding-top: 150px !important; } }`}</style>
-      <div className="commission-hero" style={{ textAlign: 'center', padding: '48px 24px 40px', background: 'transparent' }}>
+      {/* Hero — transparent PNG title, lifted above the star field */}
+      <style>{`@media (max-width: 767px){ .commission-hero { padding-top: 28px !important; } }`}</style>
+      <div className="commission-hero" style={{ textAlign: 'center', padding: '40px 24px 32px', background: 'transparent', position: 'relative', zIndex: 3 }}>
         <p style={{ fontFamily: 'Courier New, monospace', fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8C2257', marginBottom: '20px' }}>
           ˙⋆✮⋆˚ Jay McKoy ˚⋆✮⋆˙
         </p>
         {/* WORK WITH ME — transparent PNG title */}
         <img src="/work-with-me.png" alt="Work with me"
-          style={{ width: 'min(560px, 88%)', height: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none' }} />
+          style={{ width: 'min(560px, 92%)', height: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none', position: 'relative', zIndex: 3 }} />
       </div>
 
       {/* Transparent form section — stars show through */}
