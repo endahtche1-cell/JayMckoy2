@@ -60,11 +60,10 @@ export default function MusicPlayer() {
             white-space: normal !important;
             text-align: center;
           }
-          .music-player-box > div:nth-child(2) { order: -1; }   /* title/artist/progress on top */
-          .music-player-box > div:nth-child(2) p { text-align: center; }
-          .music-player-box > div:nth-child(1) { order: 0; }    /* vinyl */
-          .music-player-box > button { order: 1; }              /* play */
-          .music-player-box > div:nth-child(2) > div { width: 108px !important; }  /* progress fits card */
+          .music-player-box .mp-text { order: -1; }              /* title/artist on top */
+          .music-player-box .mp-text p { text-align: center; }
+          .music-player-box .mp-vinyl { order: 0; }              /* vinyl = play control, below */
+          .music-player-box .mp-progress { width: 104px !important; margin: 0 auto; }
         }
       `}</style>
 
@@ -81,63 +80,53 @@ export default function MusicPlayer() {
         boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
         whiteSpace: 'nowrap',
       }}>
-        {/* Vinyl wrapper — animate the DIV not the img */}
-        <div style={{ position: 'relative', width: '42px', height: '42px', flexShrink: 0 }}>
+        {/* Vinyl IS the play/pause control — click it to toggle */}
+        <button
+          className="mp-vinyl"
+          onClick={toggle}
+          aria-label={playing ? 'Pause' : 'Play'}
+          style={{
+            position: 'relative', width: '46px', height: '46px', flexShrink: 0,
+            border: 'none', padding: 0, background: 'transparent',
+            cursor: 'pointer', borderRadius: '50%', touchAction: 'manipulation',
+          }}
+        >
           <div
             className={playing ? 'vinyl-spinning' : ''}
-            style={{ width: '42px', height: '42px', borderRadius: '50%', overflow: 'hidden' }}
+            style={{ width: '46px', height: '46px', borderRadius: '50%', overflow: 'hidden' }}
           >
-            <Image
-              src="/music/vinyl.jpg"
-              alt="Vinyl"
-              width={52}
-              height={52}
-              style={{ width: '42px', height: '42px', objectFit: 'cover', display: 'block' }}
-            />
+            <Image src="/music/vinyl.jpg" alt="" width={52} height={52}
+              style={{ width: '46px', height: '46px', objectFit: 'cover', display: 'block' }} />
           </div>
-          {/* Cover centred on vinyl */}
-          <div style={{
-            position: 'absolute',
-            top: '10px', left: '10px',
-            width: '23px', height: '23px',
-            borderRadius: '50%', overflow: 'hidden', zIndex: 2,
+          {/* Cover ring */}
+          <div style={{ position: 'absolute', top: '11px', left: '11px', width: '24px', height: '24px', borderRadius: '50%', overflow: 'hidden' }}>
+            <Image src="/music/cover.jpg" alt="" width={28} height={28}
+              style={{ width: '24px', height: '24px', objectFit: 'cover', display: 'block' }} />
+          </div>
+          {/* White play / pause glyph in the centre */}
+          <span style={{
+            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+            width: '20px', height: '20px', borderRadius: '50%', background: 'rgba(0,0,0,0.5)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <Image
-              src="/music/cover.jpg"
-              alt="Cover"
-              width={28}
-              height={28}
-              style={{ width: '23px', height: '23px', objectFit: 'cover', display: 'block' }}
-            />
-          </div>
-        </div>
+            {playing
+              ? <svg width="8" height="9" viewBox="0 0 8 9"><rect x="0.5" width="2.4" height="9" rx="0.6" fill="#fff"/><rect x="5.1" width="2.4" height="9" rx="0.6" fill="#fff"/></svg>
+              : <svg width="9" height="9" viewBox="0 0 9 9"><polygon points="1.5,0.5 8.5,4.5 1.5,8.5" fill="#fff"/></svg>}
+          </span>
+        </button>
 
         {/* Track info + progress */}
-        <div style={{ minWidth: 0 }}>
+        <div className="mp-text" style={{ minWidth: 0 }}>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700, color: '#12101A', margin: 0 }}>
             Meeting You Once
           </p>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: '#888', margin: '1px 0 4px' }}>
             Natanya
           </p>
-          <div style={{ height: '2px', background: '#e8e4f0', borderRadius: '2px', width: '112px' }}>
+          <div className="mp-progress" style={{ height: '2px', background: '#e8e4f0', borderRadius: '2px', width: '112px' }}>
             <div style={{ height: '100%', background: '#8C2257', borderRadius: '2px', width: `${progress * 100}%`, transition: 'width 0.3s' }} />
           </div>
         </div>
-
-        {/* Play/Pause */}
-        <button
-          onClick={toggle}
-          style={{
-            width: '30px', height: '30px', borderRadius: '50%',
-            background: '#8C2257', border: 'none', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#fff', fontSize: '14px', flexShrink: 0,
-            touchAction: 'manipulation',
-          }}
-        >
-          {playing ? '⏸' : '▶'}
-        </button>
       </div>
     </>
   )
