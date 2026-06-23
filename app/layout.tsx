@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     url: 'https://jaymckoy.com',
     siteName: 'Jay McKoy',
     type: 'website',
-    images: [{ url: '/og-image.jpg', width: 900, height: 1273, alt: 'Jay McKoy artwork' }],
+    images: [{ url: '/og-image.jpg', width: 900, height: 1200, alt: 'Jay McKoy artwork' }],
   },
   twitter: {
     card: 'summary_large_image',
