@@ -36,8 +36,8 @@ const BUTTONS = [1,2,3,4,5,6,7,8].map((n,i) => ({
 const STARS = [43,44,45,46,47,48,49,50,51,52].map((n,i) => ({
   src: `/studio/v2/stickers/${n}.png`, label: `Star ${i+1}`, w: 70, h: 70,
 }))
-// Random: 53-61
-const RANDOM = [53,54,55,56,57,58,59,60,61].map((n,i) => ({
+// Random: 53-61 + 62 (heart)
+const RANDOM = [53,54,55,56,57,58,59,60,61,62].map((n,i) => ({
   src: `/studio/v2/stickers/${n}.png`, label: `Item ${i+1}`, w: 70, h: 70,
 }))
 
@@ -195,25 +195,35 @@ export default function Studio() {
         .cv-el:active{cursor:grabbing}
         /* Keep global stars fully behind studio */
         #global-star-field { display: none !important; }
+        /* Lighten the global page header while on Studio (logo kept full size) */
+        header { padding: 6px 0 !important; }
+        /* Tab styling — light + minimal */
+        .st-tab { transition: color .15s, border-color .15s; }
+        .st-tab:hover { color: #555 !important; }
+        /* Fit the studio to the *visible* viewport on mobile so the sticker tray
+           isn't hidden behind the browser toolbar (iOS 100vh issue) */
+        @media (max-width: 767px) {
+          html, body { height: 100dvh !important; min-height: 100dvh !important; overflow: hidden !important; }
+        }
       `}</style>
 
-      {/* ── Top bar ── */}
-      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 14px',background:'#fff',borderBottom:'1px solid #f0f0f0',flexShrink:0,gap:'8px'}}>
-        <p style={{fontFamily:'var(--font-display)',fontSize:'15px',fontWeight:700,color:'#C61D70',lineHeight:1,whiteSpace:'nowrap'}}>
+      {/* ── Top bar (slim + buttons pulled left of the music player) ── */}
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'5px 14px',paddingRight:'max(14px, calc(50% - 286px))',background:'#fff',flexShrink:0,gap:'8px'}}>
+        <p style={{fontFamily:'var(--font-display)',fontSize:'clamp(15px, 2.2vw, 28px)',fontWeight:700,color:'#C61D70',lineHeight:1,whiteSpace:'nowrap',letterSpacing:'0.02em'}}>
           ★ Studio
         </p>
-        <div style={{display:'flex',gap:'6px',alignItems:'center'}}>
+        <div style={{display:'flex',gap:'4px',alignItems:'center'}}>
           <button onClick={()=>setHist(h=>{if(!h.length)return h;setEls(h[h.length-1]);setSelId(null);return h.slice(0,-1)})}
             disabled={!hist.length}
-            style={{background:'#f5f5f5',border:'1px solid #ddd',borderRadius:'6px',padding:'7px 10px',color:'#444',fontSize:'12px',cursor:'pointer',opacity:hist.length?1:0.35,touchAction:'manipulation',whiteSpace:'nowrap'}}>
+            style={{background:'transparent',border:'none',borderRadius:'6px',padding:'6px 9px',color:'#888',fontSize:'12px',cursor:'pointer',opacity:hist.length?1:0.3,touchAction:'manipulation',whiteSpace:'nowrap'}}>
             ↩ Undo
           </button>
           <button onClick={()=>{saveH();setEls([]);setSelId(null)}}
-            style={{background:'#f5f5f5',border:'1px solid #ddd',borderRadius:'6px',padding:'7px 10px',color:'#444',fontSize:'12px',cursor:'pointer',touchAction:'manipulation'}}>
+            style={{background:'transparent',border:'none',borderRadius:'6px',padding:'6px 9px',color:'#888',fontSize:'12px',cursor:'pointer',touchAction:'manipulation'}}>
             Clear
           </button>
           <button onClick={exportPoster} disabled={exp||!els.length}
-            style={{background:P.crimson,border:'none',borderRadius:'6px',padding:'8px 14px',color:'#fff',fontWeight:700,fontSize:'13px',cursor:'pointer',opacity:els.length?1:0.4,touchAction:'manipulation',whiteSpace:'nowrap'}}>
+            style={{background:P.crimson,border:'none',borderRadius:'999px',padding:'7px 16px',color:'#fff',fontWeight:700,fontSize:'12px',cursor:'pointer',opacity:els.length?1:0.4,touchAction:'manipulation',whiteSpace:'nowrap'}}>
             {exp ? '…' : '⬇ Save'}
           </button>
         </div>
@@ -240,8 +250,8 @@ export default function Studio() {
         </div>
 
         {/* Canvas area */}
-        <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',padding:'12px',overflow:'hidden',minHeight:0}}>
-          <div style={{position:'relative',height:'100%',aspectRatio:'3/4',maxHeight:'100%',maxWidth:'calc(100vw - 8px)'}}>
+        <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',padding:'6px',overflow:'hidden',minHeight:0}}>
+          <div style={{position:'relative',height:'100%',aspectRatio:'4/5',maxHeight:'100%',maxWidth:'calc(100vw - 4px)'}}>
 
             {/* The canvas */}
             <div ref={cvRef}
@@ -300,18 +310,17 @@ export default function Studio() {
       {/* ── Tray ── */}
       <div style={{background:'#fff',borderTop:'1px solid #e8e4f0',flexShrink:0}}>
         {/* Tabs */}
-        <div className="ns" style={{display:'flex',overflowX:'auto',borderBottom:'1px solid #eee'}}>
+        <div className="ns" style={{display:'flex',overflowX:'auto',gap:'2px',padding:'0 8px'}}>
           {TABS.map(t=>(
-            <button key={t.key} onClick={()=>setTab(t.key)}
-              style={{background:tab===t.key?'rgba(41,165,242,0.12)':'transparent',border:'none',borderBottom:tab===t.key?`2px solid ${P.crimson}`:'2px solid transparent',padding:'10px 18px',color:tab===t.key?P.crimson:'#999',fontFamily:'var(--font-body)',fontSize:'12px',fontWeight:700,letterSpacing:'0.05em',textTransform:'uppercase',cursor:'pointer',whiteSpace:'nowrap',flexShrink:0,touchAction:'manipulation',transition:'color 0.15s'}}>
+            <button key={t.key} onClick={()=>setTab(t.key)} className="st-tab"
+              style={{background:'transparent',border:'none',borderBottom:tab===t.key?`2px solid ${P.crimson}`:'2px solid transparent',padding:'11px 16px',color:tab===t.key?P.crimson:'#bbb',fontFamily:'var(--font-body)',fontSize:'12px',fontWeight:tab===t.key?700:500,letterSpacing:'0.04em',cursor:'pointer',whiteSpace:'nowrap',flexShrink:0,touchAction:'manipulation'}}>
               {t.label}
             </button>
           ))}
         </div>
 
-        {/* Elements */}
         {/* Element tray */}
-        <div className="ns" style={{display:'flex',gap:'10px',padding:'12px 16px 16px',overflowX:'auto',alignItems:'center',height:'90px',flexShrink:0,background:'#fafafa',touchAction:'pan-x'}}>
+        <div className="ns" style={{display:'flex',gap:'10px',padding:'10px 16px 14px',overflowX:'auto',alignItems:'center',height:'84px',flexShrink:0,background:'#fff',touchAction:'pan-x'}}>
           {tab==='chars'    && CHARS.map(e=><TB key={e.src} {...e} onAdd={spawn}/>)}
           {tab==='buttons'  && BUTTONS.map(e=><TB key={e.src} {...e} onAdd={spawn}/>)}
           {tab==='stars'    && STARS.map(e=><TB key={e.src} {...e} onAdd={spawn}/>)}

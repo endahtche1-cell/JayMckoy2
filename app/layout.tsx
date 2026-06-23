@@ -1,9 +1,10 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Nunito } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import SpinningBadge from '@/components/SpinningBadge'
 import StarField from '@/components/StarField'
+import MusicPlayer from '@/components/MusicPlayer'
 import './globals.css'
 
 const nunito = Nunito({
@@ -11,6 +12,11 @@ const nunito = Nunito({
   variable: '--font-body',
   weight: ['400', '500', '600', '700', '800'],
 })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
   title: { default: 'Jay McKoy', template: '%s - Jay McKoy' },
@@ -33,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1" style={{ display:'flex', flexDirection:'column', minHeight:0 }}>{children}</main>
         <Footer />
         <SpinningBadge />
+        <MusicPlayer />
       </body>
     </html>
   )

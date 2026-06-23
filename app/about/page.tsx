@@ -10,13 +10,18 @@ export default function AboutPage() {
     <div style={{ position: 'relative', zIndex: 1, background: 'transparent', overflow: 'clip' }}>
       <style>{`
         @media (max-width: 768px) {
-          .about-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .about-grid { grid-template-columns: 1fr !important; gap: 18px !important; }
           .about-bio { padding-top: 0 !important; }
+          /* Camera sits ABOVE the title on mobile */
+          .about-camera { order: -1 !important; margin-left: 0 !important; justify-content: center !important; padding-top: 0 !important; }
+          .about-canvas { padding: 90px 20px 60px !important; min-height: 0 !important; }
+          /* Frames clutter/cover the text on narrow screens — hide them on mobile */
+          .about-frames { display: none !important; }
         }
       `}</style>
 
       {/* ── Scrapbook canvas ── */}
-      <div style={{
+      <div className="about-canvas" style={{
         position: 'relative',
         maxWidth: '1100px',
         margin: '0 auto',
@@ -28,7 +33,7 @@ export default function AboutPage() {
         <div className="about-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '60px',
+          gap: '24px',
           alignItems: 'start',
           position: 'relative',
           zIndex: 5,
@@ -38,22 +43,10 @@ export default function AboutPage() {
           <div className="about-bio" style={{ paddingTop: '32px', position: 'relative', zIndex: 10 }}>
 
 
-            {/* JAY McKOY in chrome metallic scrapbook letters — static, not draggable */}
+            {/* JAY McKOY — transparent PNG title */}
             <div style={{ marginBottom: '28px' }}>
-              {/* "JAY" */}
-              <div style={{ display: 'flex', gap: '0px', alignItems: 'flex-end', marginBottom: '6px' }}>
-                {[18, 9, 33].map((n, i) => (
-                  <img key={i} src={`/studio/v2/letters/${n}.png`} alt=""
-                    style={{ height: 'clamp(52px, 7vw, 80px)', width: 'auto', display: 'block', pointerEvents: 'none', userSelect: 'none', marginLeft: i > 0 ? '-6px' : '0' }} />
-                ))}
-              </div>
-              {/* "McKOY" */}
-              <div style={{ display: 'flex', gap: '0px', alignItems: 'flex-end' }}>
-                {[21, 11, 19, 23, 33].map((n, i) => (
-                  <img key={i} src={`/studio/v2/letters/${n}.png`} alt=""
-                    style={{ height: 'clamp(52px, 7vw, 80px)', width: 'auto', display: 'block', pointerEvents: 'none', userSelect: 'none', marginLeft: i > 0 ? '-6px' : '0' }} />
-                ))}
-              </div>
+              <img src="/jay-mckoy-title.png" alt="Jay McKoy"
+                style={{ width: 'min(420px, 100%)', height: 'auto', display: 'block', pointerEvents: 'none', userSelect: 'none' }} />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
@@ -104,13 +97,10 @@ export default function AboutPage() {
                 </a>
               ))}
             </div>
-            {/* Ticket — static below bio */}
-            <img src="/bridgeport-ct.png" alt="Bridgeport, CT"
-              style={{ width: 'min(400px, 90%)', height: 'auto', display: 'block', marginTop: '8px', mixBlendMode: 'multiply' }} />
           </div>
 
           {/* Camera — right column, swinging, always visible */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '20px' }}>
+          <div className="about-camera" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', paddingTop: '20px', marginLeft: '-120px' }}>
             <Image
               src="/jay-artist.png"
               alt="Jay McKoy"

@@ -10,31 +10,14 @@ export default function CommissionPage() {
     <div style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
 
       {/* Hero — plain white with scrapbook chrome letters */}
-      <div style={{ textAlign: 'center', padding: '48px 24px 40px', background: '#fff' }}>
+      <style>{`@media (max-width: 767px){ .commission-hero { padding-top: 150px !important; } }`}</style>
+      <div className="commission-hero" style={{ textAlign: 'center', padding: '48px 24px 40px', background: 'transparent' }}>
         <p style={{ fontFamily: 'Courier New, monospace', fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8C2257', marginBottom: '20px' }}>
           ˙⋆✮⋆˚ Jay McKoy ˚⋆✮⋆˙
         </p>
-        {/* WORK */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 0, marginBottom: '4px', flexWrap: 'wrap' }}>
-          {[31, 23, 26, 19].map((n, i) => (
-            <img key={i} src={`/studio/v2/letters/${n}.png`} alt=""
-              style={{ height: 'clamp(55px, 9vw, 100px)', width: 'auto', display: 'block', pointerEvents: 'none', marginLeft: i > 0 ? '-8px' : '0' }} />
-          ))}
-        </div>
-        {/* WITH */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 0, marginBottom: '4px', flexWrap: 'wrap' }}>
-          {[31, 17, 28, 16].map((n, i) => (
-            <img key={i} src={`/studio/v2/letters/${n}.png`} alt=""
-              style={{ height: 'clamp(55px, 9vw, 100px)', width: 'auto', display: 'block', pointerEvents: 'none', marginLeft: i > 0 ? '-8px' : '0' }} />
-          ))}
-        </div>
-        {/* ME */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 0, flexWrap: 'wrap' }}>
-          {[21, 13].map((n, i) => (
-            <img key={i} src={`/studio/v2/letters/${n}.png`} alt=""
-              style={{ height: 'clamp(55px, 9vw, 100px)', width: 'auto', display: 'block', pointerEvents: 'none', marginLeft: i > 0 ? '-8px' : '0' }} />
-          ))}
-        </div>
+        {/* WORK WITH ME — transparent PNG title */}
+        <img src="/work-with-me.png" alt="Work with me"
+          style={{ width: 'min(560px, 88%)', height: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none' }} />
       </div>
 
       {/* Transparent form section — stars show through */}

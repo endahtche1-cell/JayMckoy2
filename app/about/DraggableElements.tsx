@@ -7,22 +7,22 @@ type DragEl = { id: string; x: number; y: number; rot: number; w: number; src: s
 
 // Desktop positions — spread nicely around the page
 const DESKTOP: DragEl[] = [
-  { id: 'ticket',  x: 180,  y: 720,  rot: -1,  w: 480, src: '/bridgeport-ct.png',     alt: 'Bridgeport CT', aspectW: 3375, aspectH: 4219 },
   { id: 'f1',      x: -60,  y: 480,  rot: -8,  w: 210, src: '/about-images/1.png',    alt: 'Frame 1',       aspectW: 480,  aspectH: 600  },
   { id: 'f2',      x: 760,  y: 60,   rot: 7,   w: 210, src: '/about-images/2.png',    alt: 'Frame 2',       aspectW: 480,  aspectH: 600  },
   { id: 'f3',      x: 820,  y: 440,  rot: -5,  w: 220, src: '/about-images/3.png',    alt: 'Frame 3',       aspectW: 480,  aspectH: 600  },
   { id: 'f4',      x: 1040, y: 120,  rot: 8,   w: 210, src: '/about-images/4.png',    alt: 'Frame 4',       aspectW: 480,  aspectH: 600  },
   { id: 'f5',      x: 950,  y: 440,  rot: -4,  w: 200, src: '/about-images/5.png',    alt: 'Frame 5',       aspectW: 480,  aspectH: 600  },
+  { id: 'ticket',  x: 120,  y: 700,  rot: -3,  w: 300, src: '/bridgeport-ct.png',     alt: 'Bridgeport, CT', aspectW: 3375, aspectH: 4219 },
 ]
 
 // Mobile positions — small, peeking in from edges so text stays readable
 const MOBILE: DragEl[] = [
-  { id: 'ticket', x: 60,   y: 620,  rot: -1,  w: 280, src: '/bridgeport-ct.png',     alt: 'Bridgeport CT', aspectW: 3375, aspectH: 4219 },
   { id: 'f1',    x: -50,  y: 40,   rot: -10, w: 120, src: '/about-images/1.png', alt: 'Frame 1',   aspectW: 480, aspectH: 600 },
   { id: 'f2',    x: 280,  y: 20,   rot: 7,   w: 110, src: '/about-images/2.png', alt: 'Frame 2',   aspectW: 480, aspectH: 600 },
   { id: 'f3',    x: -40,  y: 680,  rot: 5,   w: 115, src: '/about-images/3.png', alt: 'Frame 3',   aspectW: 480, aspectH: 600 },
   { id: 'f4',    x: 280,  y: 660,  rot: -6,  w: 110, src: '/about-images/4.png', alt: 'Frame 4',   aspectW: 480, aspectH: 600 },
   { id: 'f5',    x: 120,  y: 820,  rot: 3,   w: 115, src: '/about-images/5.png', alt: 'Frame 5',   aspectW: 480, aspectH: 600 },
+  { id: 'ticket', x: 60,  y: 470,  rot: -3,  w: 220, src: '/bridgeport-ct.png', alt: 'Bridgeport, CT', aspectW: 3375, aspectH: 4219 },
 ]
 
 export default function DraggableElements() {

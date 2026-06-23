@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Bootzy TM';
-  src: url('/fonts/BootzyTM.woff2') format('woff2'),
-       url('/fonts/BootzyTM.woff') format('woff');
+  font-family: 'Winter Whimsy';
+  src: url('/fonts/WinterWhimsy.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -25,13 +24,19 @@
   --border: #E0DBF0;
   --on-accent: #FAFAFE;
 
-  --font-display: 'Bootzy TM', system-ui, sans-serif;
+  --font-display: 'Winter Whimsy', system-ui, sans-serif;
   --font-body: var(--font-body, 'Nunito', system-ui, sans-serif);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  overscroll-behavior-y: none;   /* stop pull-to-refresh reload */
+}
 
 body {
   background: var(--bg);
@@ -51,6 +56,14 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes swing {
   0%, 100% { transform: rotate(-4deg); }
   50%       { transform: rotate(4deg);  }
+}
+
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.vinyl-spinning {
+  animation: vinyl-spin 2s linear infinite;
 }
 
 

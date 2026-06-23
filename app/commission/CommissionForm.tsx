@@ -180,7 +180,7 @@ export default function CommissionForm() {
           onChange={v => set('background', v as Form['background'])}
           options={[
             { label: '✮ With background', value: 'yes' },
-            { label: '⋆ No background', value: 'no' },
+            { label: '✮ No background', value: 'no' },
           ]}
         />
       </div>

@@ -5,10 +5,10 @@ export const metadata: Metadata = { title: 'Contact' }
 
 export default function ContactPage() {
   return (
-    <div style={{ position: 'relative', zIndex: 1, background: '#fff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ position: 'relative', zIndex: 1, background: '#fff', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
 
 
-      <div style={{ textAlign: 'center', padding: '80px 40px', maxWidth: '560px', width: '100%' }}>
+      <div style={{ textAlign: 'center', padding: 'clamp(40px, 9vh, 96px) 40px', maxWidth: '560px', width: '100%' }}>
 
         {/* Eyebrow */}
         <p style={{

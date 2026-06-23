@@ -30,11 +30,11 @@ const placements = [
   { star: 1,  x: '92%',  y: '50%',  size: 65,  baseRotate: -25 },
   { star: 6,  x: '93%',  y: '72%',  size: 78,  baseRotate: 10  },
   { star: 9,  x: '92%',  y: '90%',  size: 68,  baseRotate: -12 },
-  // Middle — between left col and right section (~26% from left = gap area)
-  { star: 4,  x: '23%',  y: '12%',  size: 55,  baseRotate: 30  },
-  { star: 7,  x: '24%',  y: '38%',  size: 62,  baseRotate: -18 },
-  { star: 1,  x: '23%',  y: '60%',  size: 50,  baseRotate: 15  },
-  { star: 9,  x: '24%',  y: '82%',  size: 58,  baseRotate: -28 },
+  // Middle — kept clear of the About-page bio text column (pushed right of centre)
+  { star: 4,  x: '40%',  y: '10%',  size: 55,  baseRotate: 30  },
+  { star: 7,  x: '54%',  y: '40%',  size: 62,  baseRotate: -18 },
+  { star: 1,  x: '40%',  y: '88%',  size: 50,  baseRotate: 15  },
+  { star: 9,  x: '56%',  y: '78%',  size: 58,  baseRotate: -28 },
   // Between right top-row images (~55% and ~70%)
   { star: 6,  x: '52%',  y: '8%',   size: 52,  baseRotate: 20  },
   { star: 3,  x: '68%',  y: '6%',   size: 48,  baseRotate: -10 },

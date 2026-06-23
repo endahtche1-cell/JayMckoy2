@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer style={{ padding: '48px 0 56px', textAlign: 'center' }}>
+    <footer style={{ padding: '48px 0 56px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
       <a
         href="https://tiktok.com/@jaymckoyy"
         target="_blank"
