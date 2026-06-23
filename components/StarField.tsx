@@ -87,7 +87,7 @@ export default function StarField() {
             alt=""
             width={p.size}
             height={p.size}
-            style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+            style={{ objectFit: 'contain', width: '100%', height: '100%', mixBlendMode: 'multiply' }}
           />
         </div>
       ))}
