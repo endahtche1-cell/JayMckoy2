@@ -25,6 +25,8 @@ const artworks: { file: string; w: number }[] = [
 const RADIUS = 470          // desktop cylinder radius
 const STRETCH = 1.5         // desktop horizontal oval stretch
 const SPIN_BASE = 0.11      // baseline degrees/frame (continuous, never stops)
+const MAX_VEL = 0.7         // cap how fast a swipe can spin it
+const clampVel = (v: number) => Math.max(-MAX_VEL, Math.min(MAX_VEL, v))
 
 export default function SpinGallery() {
   const stageRef = useRef<HTMLDivElement>(null)
@@ -73,10 +75,10 @@ export default function SpinGallery() {
       const y = e.touches[0].clientY
       const dy = y - last
       last = y
-      vel.current += (-dy) * 0.06              // swipe up = spin faster forward
+      vel.current = clampVel(vel.current + (-dy) * 0.012)   // gentle swipe-to-speed
     }
     const onTouchEnd = () => { active = false }
-    const onWheel = (e: WheelEvent) => { vel.current += (-e.deltaY) * 0.01 }
+    const onWheel = (e: WheelEvent) => { vel.current = clampVel(vel.current + (-e.deltaY) * 0.004) }
     const onEnter = () => { if (axis.current === 'y') paused.current = true }   // desktop hover-pause
     const onLeave = () => { paused.current = false }
 
@@ -147,16 +149,23 @@ export default function SpinGallery() {
         /* ── Mobile (<768px): VERTICAL revolving cylinder ── */
         @media (max-width: 767px) {
           .fz-stage {
-            height: clamp(540px, 84vh, 880px);
-            perspective: 1150px;
-            --radius: 430px;
+            height: clamp(560px, 86vh, 900px);
+            perspective: 1200px;
+            --radius: 560px;
             --stretch: 1;
-            --ws: 0.6;
           }
           .fz-oval { transform: scaleY(var(--stretch)); }   /* vertical axis */
           .fz-card {
+            width: 50vw;                       /* UNIFORM width → consistent gaps */
             margin-left: 0;
             transform: translate(-50%, -50%) rotateX(var(--a)) translateZ(var(--radius)) scaleY(calc(1 / var(--stretch))) scale(var(--s, 1));
+          }
+          /* Uniform box so every card occupies the same height → even spacing */
+          .fz-card img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            height: auto;
+            object-fit: contain;               /* no cropping */
           }
           .fz-card:hover { --s: 1; }
         }

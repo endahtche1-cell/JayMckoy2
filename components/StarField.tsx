@@ -33,7 +33,7 @@ const placements = [
   // Middle — kept clear of the About-page bio text column (pushed right of centre)
   { star: 4,  x: '40%',  y: '10%',  size: 55,  baseRotate: 30  },
   { star: 7,  x: '54%',  y: '40%',  size: 62,  baseRotate: -18 },
-  { star: 1,  x: '40%',  y: '88%',  size: 50,  baseRotate: 15  },
+  { star: 1,  x: '4%',   y: '95%',  size: 50,  baseRotate: 15  },
   { star: 9,  x: '56%',  y: '78%',  size: 58,  baseRotate: -28 },
   // Between right top-row images (~55% and ~70%)
   { star: 6,  x: '52%',  y: '8%',   size: 52,  baseRotate: 20  },
@@ -41,8 +41,8 @@ const placements = [
   // Between right section rows (middle of page vertically)
   { star: 2,  x: '55%',  y: '35%',  size: 60,  baseRotate: 25  },
   { star: 5,  x: '70%',  y: '55%',  size: 55,  baseRotate: -22 },
-  { star: 0,  x: '45%',  y: '75%',  size: 50,  baseRotate: 16  },
-  { star: 8,  x: '60%',  y: '88%',  size: 58,  baseRotate: -8  },
+  { star: 0,  x: '45%',  y: '70%',  size: 50,  baseRotate: 16  },
+  { star: 8,  x: '90%',  y: '95%',  size: 58,  baseRotate: -8  },
 ]
 
 export default function StarField() {
