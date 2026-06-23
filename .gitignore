@@ -41,3 +41,4 @@ yarn-error.log*
 next-env.d.ts
 .claude/
 _png_originals/
+_artwork_originals/
