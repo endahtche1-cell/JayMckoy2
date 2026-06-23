@@ -24,7 +24,7 @@ const artworks: { file: string; w: number }[] = [
 
 const RADIUS = 470          // desktop cylinder radius
 const STRETCH = 1.5         // desktop horizontal oval stretch
-const SPIN_BASE = 0.11      // baseline degrees/frame (continuous, never stops)
+const SPIN_BASE = 0.055     // baseline degrees/frame (continuous, never stops)
 const MAX_VEL = 0.7         // cap how fast a swipe can spin it
 const clampVel = (v: number) => Math.max(-MAX_VEL, Math.min(MAX_VEL, v))
 
@@ -150,13 +150,13 @@ export default function SpinGallery() {
         @media (max-width: 767px) {
           .fz-stage {
             height: clamp(560px, 86vh, 900px);
-            perspective: 1200px;
-            --radius: 560px;
+            perspective: 1050px;
+            --radius: 430px;
             --stretch: 1;
           }
           .fz-oval { transform: scaleY(var(--stretch)); }   /* vertical axis */
           .fz-card {
-            width: 50vw;                       /* UNIFORM width → consistent gaps */
+            width: 34vw;                       /* UNIFORM width → consistent gaps */
             margin-left: 0;
             transform: translate(-50%, -50%) rotateX(var(--a)) translateZ(var(--radius)) scaleY(calc(1 / var(--stretch))) scale(var(--s, 1));
           }
