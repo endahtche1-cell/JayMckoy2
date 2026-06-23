@@ -48,7 +48,7 @@ export default function ContactPage() {
           href="mailto:theejaymckoy@gmail.com"
           style={{
             display: 'inline-block',
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--font-body)',
             fontSize: 'clamp(18px, 4vw, 26px)',
             fontWeight: 600,
             color: '#8C2257',
