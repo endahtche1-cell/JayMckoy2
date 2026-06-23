@@ -72,12 +72,11 @@ export default function MusicPlayer() {
         display: 'flex',
         alignItems: 'center',
         gap: '9px',
-        background: 'rgba(255,255,255,0.92)',
-        backdropFilter: 'blur(12px)',
-        border: '2px solid #8C2257',
+        background: 'transparent',
+        backdropFilter: 'blur(4px)',
+        border: '1px solid #8C2257',
         borderRadius: '999px',
         padding: '5px 13px 5px 5px',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
         whiteSpace: 'nowrap',
       }}>
         {/* Vinyl IS the play/pause control — click it to toggle */}
