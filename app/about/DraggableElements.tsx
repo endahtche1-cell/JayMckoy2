@@ -67,7 +67,7 @@ export default function DraggableElements() {
   return (
     <>
       <style>{`
-        .about-frames { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+        .about-frames { position: absolute; inset: 0; pointer-events: none; overflow: visible; z-index: 30; }
         .about-draggable-el { position: absolute; pointer-events: all; cursor: grab; user-select: none; touch-action: none; }
         .about-draggable-el:active { cursor: grabbing; }
       `}</style>

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { Nunito } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import SpinningBadge from '@/components/SpinningBadge'
 import StarField from '@/components/StarField'
 import MusicPlayer from '@/components/MusicPlayer'
 import './globals.css'
@@ -46,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main className="flex-1" style={{ display:'flex', flexDirection:'column', minHeight:0 }}>{children}</main>
         <Footer />
-        <SpinningBadge />
         <MusicPlayer />
       </body>
     </html>
