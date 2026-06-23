@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   to   { transform: rotate(360deg); }
 }
 .vinyl-spinning {
-  animation: vinyl-spin 2s linear infinite;
+  animation: vinyl-spin 4s linear infinite;
 }
 
 
