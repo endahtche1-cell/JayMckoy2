@@ -49,7 +49,10 @@ export async function emailJay(subject: string, text: string, replyTo?: string) 
     method: 'POST',
     headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: 'Jay McKoy Site <onboarding@resend.dev>',
+      // Default works only for sending to the Resend account owner's email.
+      // After verifying jaymckoy.com in Resend, set EMAIL_FROM, e.g.
+      // EMAIL_FROM="Jay McKoy <hello@jaymckoy.com>"
+      from: process.env.EMAIL_FROM || 'Jay McKoy Site <onboarding@resend.dev>',
       to: JAY_EMAIL,
       subject,
       text,
