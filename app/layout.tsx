@@ -40,6 +40,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={nunito.variable}>
+      <head>
+        <link rel="preload" href="/fonts/WinterWhimsy.otf" as="font" type="font/otf" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>
         <StarField />
         <Nav />

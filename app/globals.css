@@ -5,7 +5,7 @@
   src: url('/fonts/WinterWhimsy.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;   /* never show a fallback — only Winter Whimsy */
 }
 
 /*
