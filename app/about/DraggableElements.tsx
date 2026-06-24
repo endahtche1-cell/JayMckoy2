@@ -90,7 +90,7 @@ export default function DraggableElements() {
               alt={el.alt}
               width={el.aspectW}
               height={el.aspectH}
-              style={{ width: '100%', height: 'auto', display: 'block', pointerEvents: 'none', mixBlendMode: el.id === 'ticket' ? 'multiply' : undefined }}
+              style={{ width: '100%', height: 'auto', display: 'block', pointerEvents: 'none' }}
               draggable={false}
             />
           </div>

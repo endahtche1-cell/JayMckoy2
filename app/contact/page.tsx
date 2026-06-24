@@ -26,7 +26,7 @@ export default function ContactPage() {
         {/* Heading */}
         <h1 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(44px, 8vw, 72px)',
+          fontSize: 'clamp(80px, 16vw, 130px)',
           fontWeight: 700,
           color: '#12101A',
           lineHeight: 1.0,
@@ -65,9 +65,9 @@ export default function ContactPage() {
         {/* Supporting note */}
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
+          fontSize: '12.5px',
           color: '#888',
-          lineHeight: 1.75,
+          lineHeight: 1.7,
           marginBottom: '32px',
         }}>
           For commissions, prints, and general enquiries, use the{' '}

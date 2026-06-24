@@ -199,7 +199,7 @@ export default function CommissionForm() {
             <label style={labelStyle}>References</label>
             <input style={inputStyle} value={form.references}
               onChange={e => set('references', e.target.value)}
-              placeholder="Image URLs or describe references (optional)" />
+              placeholder="Links / references (optional)" />
           </div>
         </div>
       </div>

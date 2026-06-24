@@ -55,31 +55,33 @@ export default function AboutPage() {
               maxWidth: '470px', background: '#fff', border: '2px solid #8C2257',
               borderRadius: '14px', padding: '22px 24px',
             }}>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.7, color: '#2A2A2A' }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.7, color: '#2A2A2A' }}>
                 Artist born and raised in Bridgeport, Connecticut. My style is colorful, fun, and an expression of Black joy.
               </p>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.7, color: '#2A2A2A' }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.7, color: '#2A2A2A' }}>
                 Working towards putting smiles on people&apos;s faces and capturing the beautiful, whimsical sides of being Black, one piece at a time.
               </p>
             </div>
 
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '32px' }}>
+            <div style={{ display: 'flex', gap: '12px', marginBottom: '32px', maxWidth: '470px' }}>
               <Link href="/commission" style={{
-                padding: '11px 26px', fontSize: '14px', fontWeight: 600,
+                flex: 1, textAlign: 'center',
+                padding: '11px 18px', fontSize: '14px', fontWeight: 600,
                 fontFamily: 'var(--font-body)', background: '#fafafa',
                 color: '#2AA8B0', textDecoration: 'none',
                 border: '1.5px solid #2AA8B0', borderRadius: '999px',
-                letterSpacing: '0.02em',
+                letterSpacing: '0.02em', whiteSpace: 'nowrap',
               }}>
                 Commission a piece
               </Link>
               <Link href="/" style={{
-                padding: '11px 26px', fontSize: '14px', fontWeight: 600,
+                flex: 1, textAlign: 'center',
+                padding: '11px 18px', fontSize: '14px', fontWeight: 600,
                 fontFamily: 'var(--font-body)', background: '#fafafa',
                 color: '#8C2257', textDecoration: 'none',
                 border: '1.5px solid #8C2257', borderRadius: '999px',
-                letterSpacing: '0.02em',
+                letterSpacing: '0.02em', whiteSpace: 'nowrap',
               }}>
                 See the work
               </Link>
