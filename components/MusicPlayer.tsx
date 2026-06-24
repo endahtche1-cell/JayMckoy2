@@ -34,7 +34,8 @@ export default function MusicPlayer() {
         .mp-vinyl-btn {
           position: absolute;
           top: 104px;
-          right: calc(50% - 560px);
+          /* right edge aligns with the nav's right edge (the O of STUDIO) */
+          right: max(24px, calc(50% - 576px));
           z-index: 60;
         }
         @media (max-width: 767px) {
