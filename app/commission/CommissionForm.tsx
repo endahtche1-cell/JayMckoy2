@@ -124,7 +124,7 @@ export default function CommissionForm() {
           Request received ★
         </p>
         <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#2A6070', lineHeight: 1.7 }}>
-          Jay will review your commission and reach out with details and a payment link.
+          Jay will review your commission and reach out with details and payment info (Zelle, Cash App, Venmo, or PayPal).
         </p>
       </div>
     )

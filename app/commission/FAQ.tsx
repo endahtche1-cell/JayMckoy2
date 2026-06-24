@@ -6,7 +6,7 @@ const DEEP = '#1a2ecc'
 const faqs = [
   {
     q: 'How does payment work?',
-    a: 'Payment in full is required before work begins. Once Jay reviews and accepts your request he will send a secure invoice. We accept card and Apple Pay.',
+    a: 'Payment in full is required before work begins. Once Jay reviews and accepts your request he will send payment details. We accept Zelle, Cash App, Venmo, or PayPal.',
   },
   {
     q: 'How long does a commission take?',

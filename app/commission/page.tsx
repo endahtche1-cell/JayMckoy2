@@ -28,7 +28,7 @@ export default function CommissionPage() {
           <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', padding: '18px 22px', marginBottom: '48px', background: '#fff', border: '2px solid #1a2ecc', borderRadius: '12px' }}>
             <span style={{ color: '#1a2ecc', fontSize: '18px', flexShrink: 0, marginTop: '1px' }}>꒰ა ★ ໒꒱</span>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '13.5px', color: '#1a2ecc', lineHeight: 1.6 }}>
-              <strong>Payment in full</strong> is required before work begins. Once Jay reviews your request he will send a secure invoice. Accepts card and Apple Pay.
+              <strong>Payment in full</strong> is required before work begins. Once Jay reviews your request he will send payment details. Accepts Zelle, Cash App, Venmo, or PayPal.
             </p>
           </div>
 
