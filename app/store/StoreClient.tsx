@@ -106,7 +106,7 @@ function StoreCard({ item }: { item: StoreItem }) {
           Sold out
         </button>
       ) : item.type === 'original' ? (
-        <Link href="/contact"
+        <Link href="/commission"
           className="block w-full py-2.5 text-sm font-bold text-center rounded-sm"
           style={{ border: '1px solid var(--accent)', color: 'var(--accent)', fontFamily: 'var(--font-body)' }}>
           Contact for purchase
@@ -160,7 +160,7 @@ export default function StoreClient() {
         <span>📦</span>
         <p className="text-sm" style={{ opacity: 0.7, fontFamily: 'var(--font-body)' }}>
           <strong>Domestic shipping only.</strong> Please allow 1–2 weeks for your order to arrive.
-          Prints are produced and shipped with care. Questions? <a href="/contact"
+          Prints are produced and shipped with care. Questions? <a href="/commission"
             style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Reach out</a>.
         </p>
       </div>

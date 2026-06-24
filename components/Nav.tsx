@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react'
 const links = [
   { href: '/commission', label: 'Commission' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
   { href: '/doodle', label: '★ Studio' },
 ]
 

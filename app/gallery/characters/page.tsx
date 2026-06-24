@@ -143,7 +143,7 @@ export default function CharactersPage() {
             { href: '/store', label: 'Store' },
             { href: '/commission', label: 'Commission' },
             { href: '/about', label: 'About' },
-            { href: '/contact', label: 'Contact' },
+            { href: '/commission', label: 'Commission' },
           ].map(({ href, label }) => (
             <Link key={href} href={href} style={{
               fontFamily: mono, fontSize: '11px', color: '#aaa',

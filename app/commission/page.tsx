@@ -9,9 +9,6 @@ export default function CommissionPage() {
   return (
     <div style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
 
-      {/* Hide the busy star field on this page so the title + form stay readable */}
-      <style>{`#global-star-field { display: none !important; }`}</style>
-
       {/* Hero — transparent PNG title, lifted above the star field */}
       <style>{`@media (max-width: 767px){ .commission-hero { padding-top: 28px !important; } }`}</style>
       <div className="commission-hero" style={{ textAlign: 'center', padding: '40px 24px 32px', background: 'transparent', position: 'relative', zIndex: 3 }}>
