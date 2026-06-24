@@ -15,7 +15,7 @@ const inputStyle: React.CSSProperties = {
   borderRadius: '6px',
   color: '#1a2ecc',
   fontFamily: 'var(--font-body)',
-  fontSize: '15px',
+  fontSize: '14px',
   outline: 'none',
 }
 
@@ -32,12 +32,12 @@ const labelStyle: React.CSSProperties = {
 
 const sectionLabel: React.CSSProperties = {
   fontFamily: 'var(--font-display)',
-  fontSize: '22px',
+  fontSize: '17px',
   fontWeight: 700,
   color: '#1a2ecc',
-  marginBottom: '16px',
-  paddingBottom: '8px',
-  borderBottom: `3px solid ${TEAL}`,
+  marginBottom: '12px',
+  paddingBottom: '7px',
+  borderBottom: `2px solid ${TEAL}`,
 }
 
 type Form = {
