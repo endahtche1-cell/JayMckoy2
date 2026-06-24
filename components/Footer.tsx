@@ -25,7 +25,7 @@ export default function Footer() {
         fontFamily: 'var(--font-body)',
         letterSpacing: '0.04em',
       }}>
-        © {year} Jay McKoy · Site by Kiet Studios
+        © {year} Jay McKoy · Site by KIET STUDIOS
       </p>
     </footer>
   )
