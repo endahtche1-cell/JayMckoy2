@@ -165,14 +165,6 @@ export default function Studio() {
         })
       }
 
-      // 4. Jay's logo as signature — bottom right
-      await new Promise<void>(res=>{
-        const wm=new window.Image(); wm.crossOrigin='anonymous'
-        wm.onload=()=>{ ctx.globalAlpha=.85; ctx.drawImage(wm,W-130,H-68,120,58); ctx.globalAlpha=1; res() }
-        wm.onerror=()=>res()
-        wm.src=window.location.origin+'/brand/logo-badge.png'
-      })
-
       const a=document.createElement('a'); a.download='my-jay-poster.png'
       a.href=c.toDataURL('image/png'); document.body.appendChild(a); a.click(); document.body.removeChild(a)
     } finally { setExp(false) }
@@ -261,7 +253,7 @@ export default function Studio() {
               style={{
                 width:'100%',height:'100%',
                 position:'relative',
-                backgroundImage:"url('/studio/canvas-web.png')",backgroundSize:'contain',backgroundPosition:'center',backgroundRepeat:'no-repeat',backgroundColor:'transparent',
+                backgroundImage:"url('/studio/canvas-web.png')",backgroundSize:'100% 100%',backgroundPosition:'center',backgroundRepeat:'no-repeat',backgroundColor:'transparent',
                 overflow:'visible',
                 touchAction:'none',
               }}>
