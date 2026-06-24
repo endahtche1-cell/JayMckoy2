@@ -4,16 +4,16 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 
 const starFiles = [
-  '_ (11).jpeg',
-  '_ (12).jpeg',
-  '_ (13).jpeg',
-  '_ (14).jpeg',
-  '_ (15).jpeg',
-  '_ (16).jpeg',
-  '_ (17).jpeg',
-  '_ (18).jpeg',
-  '_ (19).jpeg',
-  '_ (20).jpeg',
+  '_ (11).png',
+  '_ (12).png',
+  '_ (13).png',
+  '_ (14).png',
+  '_ (15).png',
+  '_ (16).png',
+  '_ (17).png',
+  '_ (18).png',
+  '_ (19).png',
+  '_ (20).png',
 ]
 
 // Spread across full page — edges AND middle gaps between images
@@ -87,7 +87,7 @@ export default function StarField() {
             alt=""
             width={p.size}
             height={p.size}
-            style={{ objectFit: 'contain', width: '100%', height: '100%', mixBlendMode: 'multiply' }}
+            style={{ objectFit: 'contain', width: '100%', height: '100%' }}
           />
         </div>
       ))}
