@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jay McKoy — Floating Stars (export)</title>
+<style>
+  :root { --bg:#00b140; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { height:100%; overflow:hidden; background:var(--bg); }
+  body.checker { background-image:
+      linear-gradient(45deg,#ccc 25%,transparent 25%),linear-gradient(-45deg,#ccc 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#ccc 75%),linear-gradient(-45deg,transparent 75%,#ccc 75%);
+      background-size:40px 40px; background-position:0 0,0 20px,20px -20px,-20px 0; background-color:#fff; }
+  .star { position:absolute; will-change:transform; }
+  .star img { width:100%; height:100%; object-fit:contain; display:block; }
+  @keyframes float { 0%,100%{ transform:translateY(0) rotate(var(--r)); } 50%{ transform:translateY(-26px) rotate(calc(var(--r) + 16deg)); } }
+  .controls { position:fixed; top:14px; left:50%; transform:translateX(-50%); display:flex; gap:8px;
+              align-items:center; z-index:10; background:rgba(0,0,0,.55); color:#fff; padding:8px 12px;
+              border-radius:999px; font:13px/1 system-ui,sans-serif; }
+  .controls.hidden { display:none; }
+  .sw { width:22px; height:22px; border-radius:50%; border:2px solid #fff; cursor:pointer; }
+  .controls button { background:#fff2; color:#fff; border:1px solid #fff5; border-radius:999px; padding:5px 10px; cursor:pointer; font:inherit; }
+</style>
+</head>
+<body>
+  <div class="controls" id="ui">
+    <span class="sw" style="background:#00b140" onclick="setBg('#00b140')"></span>
+    <span class="sw" style="background:#fff" onclick="setBg('#fff')"></span>
+    <span class="sw" style="background:#8C2257" onclick="setBg('#8C2257')"></span>
+    <button onclick="document.body.classList.add('checker')">Transparent preview</button>
+    <button onclick="document.getElementById('ui').classList.add('hidden')">Hide UI (H)</button>
+  </div>
+<script>
+  const BASE='https://jaymckoy.com/stars/';
+  const files=[11,12,13,14,15,16,17,18,19,20].map(n=>`_ (${n}).png`);
+  const COUNT=22;
+  for(let i=0;i<COUNT;i++){
+    const el=document.createElement('div'); el.className='star';
+    const size=40+Math.random()*90;
+    el.style.width=size+'px'; el.style.height=size+'px';
+    el.style.left=(Math.random()*92)+'vw'; el.style.top=(Math.random()*88)+'vh';
+    el.style.setProperty('--r',(Math.random()*60-30)+'deg');
+    el.style.animation=`float ${4+Math.random()*4}s ease-in-out ${Math.random()*4}s infinite`;
+    const img=document.createElement('img'); img.crossOrigin='anonymous';
+    img.src=BASE+encodeURIComponent(files[i%files.length]);
+    el.appendChild(img); document.body.appendChild(el);
+  }
+  function setBg(c){ document.body.classList.remove('checker'); document.documentElement.style.setProperty('--bg',c); }
+  addEventListener('keydown',e=>{ if(e.key.toLowerCase()==='h') document.getElementById('ui').classList.toggle('hidden'); });
+</script>
+</body>
+</html>

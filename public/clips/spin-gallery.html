@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jay McKoy — Spinning Gallery (export)</title>
+<style>
+  :root { --bg: #00b140; }            /* chroma green by default */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; background: var(--bg); }
+
+  /* Checkerboard = transparent preview */
+  body.checker {
+    background-image:
+      linear-gradient(45deg, #ccc 25%, transparent 25%),
+      linear-gradient(-45deg, #ccc 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #ccc 75%),
+      linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+    background-color: #fff;
+  }
+
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    perspective: 1500px; perspective-origin: 50% 50%;
+    overflow: hidden;
+  }
+  .oval { position: relative; width: 100%; height: 720px;
+          transform-style: preserve-3d; transform: scaleX(1.5); }
+  .ring { position: absolute; inset: 0; transform-style: preserve-3d;
+          animation: spin var(--spin, 50s) linear infinite; }
+  @keyframes spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+
+  .card {
+    position: absolute; top: 50%; left: 50%;
+    margin-left: calc(var(--w) / -2);
+    backface-visibility: visible;
+    transform: translateY(-50%) rotateY(var(--a)) translateZ(470px) scaleX(0.6667);
+  }
+  .card img { display: block; width: var(--w); height: auto;
+              box-shadow: 0 6px 22px rgba(0,0,0,.22); }
+
+  /* Controls (hide before recording with the "Hide UI" button or press H) */
+  .controls {
+    position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px; align-items: center; z-index: 10;
+    background: rgba(0,0,0,.55); color: #fff; padding: 8px 12px; border-radius: 999px;
+    font: 13px/1 -apple-system, system-ui, sans-serif; backdrop-filter: blur(6px);
+  }
+  .controls.hidden { display: none; }
+  .sw { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; }
+  .controls button { background:#fff2; color:#fff; border:1px solid #fff5; border-radius:999px;
+                     padding:5px 10px; cursor:pointer; font:inherit; }
+  .controls input[type=range] { width: 110px; }
+</style>
+</head>
+<body>
+  <div class="controls" id="ui">
+    <span>BG:</span>
+    <span class="sw" style="background:#00b140" title="Green screen" onclick="setBg('#00b140')"></span>
+    <span class="sw" style="background:#fff"     title="White"        onclick="setBg('#fff')"></span>
+    <span class="sw" style="background:#8C2257"  title="Magenta"      onclick="setBg('#8C2257')"></span>
+    <button onclick="checker()">Transparent preview</button>
+    <span>Speed</span>
+    <input type="range" min="20" max="90" value="50" oninput="document.documentElement.style.setProperty('--spin', this.value + 's')" />
+    <button onclick="document.getElementById('ui').classList.add('hidden')">Hide UI (H)</button>
+  </div>
+
+  <div class="stage">
+    <div class="oval"><div class="ring" id="ring"></div></div>
+  </div>
+
+<script>
+  const BASE = 'https://jaymckoy.com/artwork/';
+  const ART = [
+    ['IMG_6848.jpg',180],['IMG_6869.jpg',220],['IMG_6741.jpg',190],['IMG_6858.jpg',210],
+    ['IMG_6849.jpg',230],['IMG_6743.jpg',200],['IMG_6860.jpg',240],['IMG_6841.jpg',190],
+    ['IMG_6810.jpg',230],['IMG_6861.jpg',200],['IMG_6746.jpg',180],['IMG_6774.jpg',220],
+    ['IMG_6859.jpg',190],
+  ];
+  const ring = document.getElementById('ring');
+  const step = 360 / ART.length;
+  ART.forEach(([file, w], i) => {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.style.setProperty('--w', w + 'px');
+    a.style.setProperty('--a', (i * step) + 'deg');
+    const img = document.createElement('img');
+    img.src = BASE + file; img.alt = ''; img.crossOrigin = 'anonymous';
+    a.appendChild(img); ring.appendChild(a);
+  });
+
+  function setBg(c){ document.body.classList.remove('checker'); document.documentElement.style.setProperty('--bg', c); }
+  function checker(){ document.body.classList.add('checker'); }
+  addEventListener('keydown', e => { if (e.key.toLowerCase() === 'h') document.getElementById('ui').classList.toggle('hidden'); });
+</script>
+</body>
+</html>

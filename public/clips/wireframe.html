@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jay McKoy — Wireframe to Final (export)</title>
+<style>
+  :root { --bg:#00b140; }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
+  html,body{height:100%;overflow:hidden;background:var(--bg)}
+  body.checker{background-image:linear-gradient(45deg,#ccc 25%,transparent 25%),linear-gradient(-45deg,#ccc 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ccc 75%),linear-gradient(-45deg,transparent 75%,#ccc 75%);background-size:40px 40px;background-position:0 0,0 20px,20px -20px,-20px 0;background-color:#fff}
+  .stage{width:100%;height:100vh;display:flex;align-items:center;justify-content:center}
+  .frame{position:relative;width:min(86vw,820px);height:min(86vh,560px);border-radius:18px;overflow:hidden;
+         box-shadow:0 24px 70px rgba(0,0,0,.3);background:#fff}
+  .layer{position:absolute;inset:0}
+  /* wireframe */
+  .wire{background:#f3f3f3;animation:showWire 8s ease-in-out infinite}
+  .wbar{position:absolute;background:#d6d6d6;border-radius:6px}
+  .wbox{position:absolute;background:#e2e2e2;border:2px dashed #c2c2c2;border-radius:10px}
+  .wline{position:absolute;height:10px;background:#dcdcdc;border-radius:5px}
+  /* final */
+  .final{opacity:0;animation:showFinal 8s ease-in-out infinite}
+  .badge{position:absolute;left:34px;top:30px;width:150px;height:64px;border-radius:999px;
+         background:linear-gradient(120deg,#6EA3D0,#A89FD4,#1D752C);border:3px solid #8C2257;
+         display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;letter-spacing:.5px}
+  .nav{position:absolute;right:34px;top:48px;display:flex;gap:22px;color:#111;font-size:14px;font-weight:600}
+  .gallery{position:absolute;left:0;right:0;top:150px;display:flex;gap:12px;justify-content:center}
+  .gcard{width:120px;height:160px;border-radius:6px;background-size:cover;background-position:center;box-shadow:0 8px 22px rgba(0,0,0,.2)}
+  .cta{position:absolute;left:50%;bottom:46px;transform:translateX(-50%);background:#8C2257;color:#fff;
+       padding:12px 28px;border-radius:999px;font-weight:700}
+  @keyframes showWire{0%,42%{opacity:1}55%,95%{opacity:0}100%{opacity:1}}
+  @keyframes showFinal{0%,42%{opacity:0}55%,95%{opacity:1}100%{opacity:0}}
+  .controls{position:fixed;top:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:10;background:rgba(0,0,0,.55);color:#fff;padding:8px 12px;border-radius:999px;font-size:13px}
+  .controls.hidden{display:none}.sw{width:22px;height:22px;border-radius:50%;border:2px solid #fff;cursor:pointer}
+  .controls button{background:#fff2;color:#fff;border:1px solid #fff5;border-radius:999px;padding:5px 10px;cursor:pointer;font:inherit}
+</style>
+</head>
+<body>
+  <div class="controls" id="ui">
+    <span class="sw" style="background:#00b140" onclick="setBg('#00b140')"></span>
+    <span class="sw" style="background:#fff" onclick="setBg('#fff')"></span>
+    <span class="sw" style="background:#8C2257" onclick="setBg('#8C2257')"></span>
+    <button onclick="document.body.classList.add('checker')">Transparent preview</button>
+    <button onclick="document.getElementById('ui').classList.add('hidden')">Hide UI (H)</button>
+  </div>
+  <div class="stage">
+    <div class="frame">
+      <div class="layer wire">
+        <div class="wbar" style="left:34px;top:34px;width:150px;height:56px;border-radius:28px"></div>
+        <div class="wbar" style="right:34px;top:50px;width:230px;height:18px"></div>
+        <div class="wbox" style="left:120px;top:150px;width:120px;height:160px"></div>
+        <div class="wbox" style="left:260px;top:150px;width:120px;height:160px"></div>
+        <div class="wbox" style="left:400px;top:150px;width:120px;height:160px"></div>
+        <div class="wbox" style="left:540px;top:150px;width:120px;height:160px"></div>
+        <div class="wline" style="left:300px;bottom:70px;width:200px"></div>
+      </div>
+      <div class="layer final" id="final">
+        <div class="badge">Jay McKoy</div>
+        <div class="nav"><span>COMMISSION</span><span>ABOUT</span><span>★ STUDIO</span></div>
+        <div class="gallery" id="gal"></div>
+        <div class="cta">Work with me</div>
+      </div>
+    </div>
+  </div>
+<script>
+  const imgs=['IMG_6859.jpg','IMG_6741.jpg','IMG_6860.jpg','IMG_6849.jpg'];
+  document.getElementById('gal').innerHTML=imgs.map(f=>`<div class="gcard" style="background-image:url('https://jaymckoy.com/artwork/${f}')"></div>`).join('');
+  function setBg(c){document.body.classList.remove('checker');document.documentElement.style.setProperty('--bg',c)}
+  addEventListener('keydown',e=>{if(e.key.toLowerCase()==='h')document.getElementById('ui').classList.toggle('hidden')});
+</script>
+</body>
+</html>

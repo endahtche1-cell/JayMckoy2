@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jay McKoy — Studio Poster Build (export)</title>
+<style>
+  :root { --bg:#00b140; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:var(--bg)}
+  body.checker{background-image:linear-gradient(45deg,#ccc 25%,transparent 25%),linear-gradient(-45deg,#ccc 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ccc 75%),linear-gradient(-45deg,transparent 75%,#ccc 75%);background-size:40px 40px;background-position:0 0,0 20px,20px -20px,-20px 0;background-color:#fff}
+  .stage{width:100%;height:100vh;display:flex;align-items:center;justify-content:center}
+  .poster{position:relative;width:440px;height:550px;background:url('https://jaymckoy.com/studio/canvas-web.png') center/100% 100% no-repeat;
+          border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.3);opacity:0;animation:posterIn .7s ease-out forwards}
+  @keyframes posterIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .piece{position:absolute;opacity:0}
+  .piece img{width:100%;height:auto;display:block}
+  /* each piece flies in: starts off its mark + rotated + small, lands at --fr rotation */
+  @keyframes fly{
+    from{opacity:0;transform:translate(var(--fx),var(--fy)) rotate(var(--fri)) scale(.4)}
+    60%{opacity:1}
+    to{opacity:1;transform:translate(0,0) rotate(var(--fr)) scale(1)}
+  }
+  .controls{position:fixed;top:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:10;background:rgba(0,0,0,.55);color:#fff;padding:8px 12px;border-radius:999px;font:13px/1 system-ui,sans-serif}
+  .controls.hidden{display:none}.sw{width:22px;height:22px;border-radius:50%;border:2px solid #fff;cursor:pointer}
+  .controls button{background:#fff2;color:#fff;border:1px solid #fff5;border-radius:999px;padding:5px 10px;cursor:pointer;font:inherit}
+</style>
+</head>
+<body>
+  <div class="controls" id="ui">
+    <span class="sw" style="background:#00b140" onclick="setBg('#00b140')"></span>
+    <span class="sw" style="background:#fff" onclick="setBg('#fff')"></span>
+    <span class="sw" style="background:#8C2257" onclick="setBg('#8C2257')"></span>
+    <button onclick="document.body.classList.add('checker')">Transparent preview</button>
+    <button onclick="replay()">Replay</button>
+    <button onclick="document.getElementById('ui').classList.add('hidden')">Hide UI (H)</button>
+  </div>
+  <div class="stage"><div class="poster" id="poster"></div></div>
+<script>
+  const B='https://jaymckoy.com/studio/v2/';
+  // [src, left, top, width, finalRotateDeg, delay s]
+  const PIECES=[
+    [B+'characters/35.png', 150, 70, 150, -4, .5],
+    [B+'stickers/45.png',   285, 150, 95, 10, 1.0],
+    [B+'stickers/48.png',    40, 200, 80, -12, 1.3],
+    [B+'letters/18.png',     95, 330, 90, -6, 1.7],   // J
+    [B+'letters/9.png',     185, 330, 90, 3, 2.0],    // A
+    [B+'letters/33.png',    275, 330, 90, -3, 2.3],   // Y
+    [B+'stickers/50.png',   330, 380, 80, 16, 2.7],
+  ];
+  const poster=document.getElementById('poster');
+  function build(){
+    poster.querySelectorAll('.piece').forEach(n=>n.remove());
+    PIECES.forEach(([src,l,t,w,fr,d])=>{
+      const el=document.createElement('div'); el.className='piece';
+      el.style.left=l+'px'; el.style.top=t+'px'; el.style.width=w+'px';
+      el.style.setProperty('--fr',fr+'deg');
+      el.style.setProperty('--fri',(fr+(Math.random()*120-60))+'deg');
+      el.style.setProperty('--fx',(Math.random()*700-350)+'px');
+      el.style.setProperty('--fy',(Math.random()*500-250)+'px');
+      el.style.animation=`fly .8s cubic-bezier(.2,.8,.2,1) ${d}s forwards`;
+      const img=document.createElement('img'); img.crossOrigin='anonymous'; img.src=src;
+      el.appendChild(img); poster.appendChild(el);
+    });
+  }
+  function replay(){ poster.style.animation='none'; void poster.offsetWidth; poster.style.animation='posterIn .7s ease-out forwards'; build(); }
+  build();
+  function setBg(c){document.body.classList.remove('checker');document.documentElement.style.setProperty('--bg',c)}
+  addEventListener('keydown',e=>{if(e.key.toLowerCase()==='h')document.getElementById('ui').classList.toggle('hidden')});
+</script>
+</body>
+</html>
