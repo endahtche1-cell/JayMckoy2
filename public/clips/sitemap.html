@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sitemapping (export)</title>
+<style>
+  :root { --bg:#7a1c1c; }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Georgia',serif}
+  html,body{height:100%;overflow:hidden;background:var(--bg)}
+  body.green{--bg:#00b140}
+  body.white{--bg:#fff}
+  .wrap{width:100%;height:100vh;display:flex;align-items:center;justify-content:center}
+  .stage{position:relative;width:920px;height:560px;transform-origin:center;
+         background:var(--bg);border-radius:14px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.3)}
+  /* cream side panel + rotated label */
+  .panel{position:absolute;left:0;top:0;width:92px;height:100%;background:#f3ece0}
+  .panel span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);
+              white-space:nowrap;font-size:46px;color:#7a1c1c;font-weight:700;letter-spacing:1px}
+  svg{position:absolute;inset:0;width:100%;height:100%}
+  path{fill:none;stroke:#4a1010;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
+       stroke-dasharray:1;stroke-dashoffset:1}
+  body.green path,body.white path{stroke:#7a1c1c}
+  .box{position:absolute;background:#efe6d6;color:#5a1414;border-radius:8px;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+       font-size:15px;font-weight:600;box-shadow:0 4px 10px rgba(0,0,0,.18);opacity:0}
+  .box small{font-size:10px;font-weight:400;color:#9a7d6f;margin-top:2px}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+  .controls{position:fixed;top:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:10;background:rgba(0,0,0,.6);color:#fff;padding:8px 12px;border-radius:999px;font-family:system-ui;font-size:13px}
+  .controls.hidden{display:none}.sw{width:22px;height:22px;border-radius:50%;border:2px solid #fff;cursor:pointer}
+  .controls button{background:#fff2;color:#fff;border:1px solid #fff5;border-radius:999px;padding:5px 10px;cursor:pointer;font:inherit}
+</style>
+</head>
+<body>
+  <div class="controls" id="ui">
+    <span class="sw" style="background:#7a1c1c" onclick="setBg('')"></span>
+    <span class="sw" style="background:#00b140" onclick="setBg('green')"></span>
+    <span class="sw" style="background:#fff" onclick="setBg('white')"></span>
+    <button onclick="replay()">Replay</button>
+    <button onclick="document.getElementById('ui').classList.add('hidden')">Hide UI (H)</button>
+  </div>
+  <div class="wrap"><div class="stage" id="stage">
+    <div class="panel"><span>Sitemapping</span></div>
+    <svg viewBox="0 0 920 560" id="svg" preserveAspectRatio="none">
+      <!-- homepage -> top row -->
+      <path d="M460,82 V120 H205 V150" style="--d:.6s"></path>
+      <path d="M460,82 V120 H385 V150" style="--d:.75s"></path>
+      <path d="M460,82 V120 H565 V150" style="--d:.9s"></path>
+      <path d="M460,82 V120 H745 V150" style="--d:1.05s"></path>
+      <!-- gallery -> portraits/characters/sketches -->
+      <path d="M205,190 V230" style="--d:1.8s"></path>
+      <path d="M205,268 V298" style="--d:2.4s"></path>
+      <path d="M205,336 V366" style="--d:3.0s"></path>
+      <!-- homepage -> socials/newsletter -->
+      <path d="M460,82 V405 H385 V420" style="--d:2.0s"></path>
+      <path d="M460,82 V405 H565 V420" style="--d:2.2s"></path>
+    </svg>
+  </div></div>
+<script>
+  const BOXES=[
+    ['Homepage',400,40,120,42,'',.2],
+    ['Gallery',150,150,110,40,'',1.3],
+    ['Store',330,150,110,40,'',1.45],
+    ['About',510,150,110,40,'',1.6],
+    ['Contact',688,150,130,48,'Goes to email',1.75],
+    ['Portraits',150,230,110,38,'',2.3],
+    ['Characters',150,298,110,38,'',2.9],
+    ['Sketches',150,366,110,38,'',3.5],
+    ['Socials',330,420,110,40,'',2.6],
+    ['Newsletter',500,420,130,40,'',2.8],
+  ];
+  const stage=document.getElementById('stage');
+  function fit(){ const s=Math.min(innerWidth/940,innerHeight/600); stage.style.transform='scale('+s+')'; }
+  addEventListener('resize',fit); fit();
+  function build(){
+    stage.querySelectorAll('.box').forEach(b=>b.remove());
+    BOXES.forEach(([label,x,y,w,h,sub,delay])=>{
+      const b=document.createElement('div'); b.className='box';
+      b.style.left=x+'px'; b.style.top=y+'px'; b.style.width=w+'px'; b.style.height=h+'px';
+      b.style.animation=`pop .45s cubic-bezier(.2,.9,.3,1.2) ${delay}s forwards`;
+      b.innerHTML = label + (sub?`<small>${sub}</small>`:'');
+      stage.appendChild(b);
+    });
+    document.querySelectorAll('#svg path').forEach(p=>{
+      p.style.animation='none'; void p.getBoundingClientRect();
+      p.style.animation=`draw .7s ease forwards var(--d)`;
+    });
+  }
+  function replay(){ build(); }
+  build();
+  function setBg(c){ document.body.className=c; }
+  addEventListener('keydown',e=>{ if(e.key.toLowerCase()==='h') document.getElementById('ui').classList.toggle('hidden'); });
+</script>
+</body>
+</html>
