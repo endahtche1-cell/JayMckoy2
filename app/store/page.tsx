@@ -1,15 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getStoreItems, itemImage, SANITY_CONFIGURED } from '@/lib/store'
+import { getStoreItems, STRIPE_CONFIGURED } from '@/lib/store'
 import StoreGrid from '@/components/store/StoreGrid'
 
 export const metadata: Metadata = { title: 'Store' }
 export const revalidate = 60
 
 export default async function StorePage() {
-  const raw = await getStoreItems().catch(() => [])
-  // resolve image URLs server-side so the client grid can render them
-  const items = raw.map(it => ({ ...it, imageUrl: itemImage(it, 600) }))
+  const items = await getStoreItems().catch(() => [])
 
   return (
     <div style={{ position: 'relative', zIndex: 1, minHeight: '70vh', padding: '44px 24px 96px' }}>
@@ -21,15 +19,14 @@ export default async function StorePage() {
           Store
         </h1>
 
-        {/* slim, chic info line */}
         <p style={{ fontFamily: 'var(--font-body)', textAlign: 'center', color: '#9a90a2', fontSize: '11.5px',
           letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '34px' }}>
           Domestic shipping · allow 1–2 weeks · card &amp; Apple&nbsp;Pay
         </p>
 
-        {!SANITY_CONFIGURED && items.length > 0 && (
+        {!STRIPE_CONFIGURED && items.length > 0 && (
           <p style={{ fontFamily: 'var(--font-body)', textAlign: 'center', fontSize: '12px', color: '#b06', background: '#fbeef4', border: '1px solid #f2cfe0', borderRadius: '999px', padding: '7px 16px', width: 'fit-content', margin: '0 auto 30px' }}>
-            ✦ Preview — sample prints until Jay&apos;s real products are added
+            ✦ Preview — sample prints until Jay&apos;s real products are added in Stripe
           </p>
         )}
 

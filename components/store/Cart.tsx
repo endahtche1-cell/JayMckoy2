@@ -1,13 +1,16 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { money } from '@/lib/store'
 
 export type CartLine = {
   key: string      // slug | size
   slug: string
   title: string
   size?: string
-  price: number    // pence (display only — server re-validates)
+  price: number    // smallest currency unit (display only)
+  priceId?: string // Stripe price id — used for checkout
+  currency?: string
   image: string
   qty: number
 }
@@ -24,7 +27,7 @@ type CartCtx = {
 }
 
 const Ctx = createContext<CartCtx | null>(null)
-const KEY = 'jm_cart_v1'
+const KEY = 'jm_cart_v2'
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([])
@@ -68,7 +71,7 @@ export function useCart() {
   return c
 }
 
-const gbp = (p: number) => '£' + (p / 100).toFixed(2).replace(/\.00$/, '')
+const gbp = (p: number, c?: string) => money(p, c)
 
 export function CartButton() {
   const { count, setOpen } = useCart()
@@ -92,7 +95,7 @@ function CartDrawer() {
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lines: lines.map(l => ({ slug: l.slug, size: l.size, qty: l.qty })) }),
+        body: JSON.stringify({ lines: lines.map(l => ({ priceId: l.priceId, qty: l.qty })) }),
       })
       const data = await res.json()
       if (data.url) window.location.href = data.url
@@ -120,7 +123,7 @@ function CartDrawer() {
               <div style={{ flex: 1 }}>
                 <p style={{ fontWeight: 700, fontSize: '14px' }}>{l.title}</p>
                 {l.size && <p style={{ fontSize: '12px', color: '#888' }}>{l.size}</p>}
-                <p style={{ fontSize: '13px', color: '#8C2257', fontWeight: 600 }}>{gbp(l.price)}</p>
+                <p style={{ fontSize: '13px', color: '#8C2257', fontWeight: 600 }}>{gbp(l.price, l.currency)}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                   <button onClick={() => setQty(l.key, l.qty - 1)} style={qtyBtn}>−</button>
                   <span style={{ fontSize: '13px' }}>{l.qty}</span>
@@ -135,7 +138,7 @@ function CartDrawer() {
         {lines.length > 0 && (
           <div style={{ padding: '18px 20px', borderTop: '1px solid #eee' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontWeight: 700 }}>
-              <span>Total</span><span>{gbp(total)}</span>
+              <span>Total</span><span>{gbp(total, lines[0]?.currency)}</span>
             </div>
             <button onClick={checkout} disabled={loading}
               style={{ width: '100%', background: '#8C2257', color: '#fff', border: 'none', borderRadius: '999px',

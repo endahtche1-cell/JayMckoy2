@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
-import { getStoreItem, itemImage } from '@/lib/store'
 
-type InLine = { slug: string; size?: string; qty: number }
+type InLine = { priceId?: string; qty: number }
 
 export async function POST(req: NextRequest) {
   try {
-    if (!process.env.STRIPE_SECRET_KEY) {
+    if (!/^sk_(test|live)_[A-Za-z0-9]{24,}$/.test(process.env.STRIPE_SECRET_KEY || '')) {
       return NextResponse.json({ error: 'Store not configured yet.' }, { status: 500 })
     }
     const { lines } = (await req.json()) as { lines: InLine[] }
@@ -17,34 +16,15 @@ export async function POST(req: NextRequest) {
     const origin = req.headers.get('origin') || new URL(req.url).origin
     const line_items: import('stripe').Stripe.Checkout.SessionCreateParams.LineItem[] = []
 
-    // Re-fetch every item from Sanity so prices can't be tampered with client-side.
+    // Validate each price against Stripe (must be a real, active price on the account)
     for (const line of lines) {
-      const item = await getStoreItem(line.slug)
-      if (!item || item.status !== 'available') continue
-      const qty = Math.max(1, Math.min(20, Number(line.qty) || 1))
-
-      // Resolve price/label from the chosen size, else the base item.
-      let price = item.price
-      let stripePriceId = item.stripePriceId
-      let label = item.title
-      if (line.size && item.sizes?.length) {
-        const s = item.sizes.find(x => x.label === line.size)
-        if (s) { price = s.price ?? price; stripePriceId = s.stripePriceId ?? stripePriceId; label = `${item.title} — ${s.label}` }
-      }
-
-      if (stripePriceId) {
-        line_items.push({ price: stripePriceId, quantity: qty })
-      } else if (price != null) {
-        const image = itemImage(item, 800)
-        line_items.push({
-          quantity: qty,
-          price_data: {
-            currency: 'gbp',
-            unit_amount: price,
-            product_data: { name: label, ...(image ? { images: [image] } : {}) },
-          },
-        })
-      }
+      if (!line.priceId || !line.priceId.startsWith('price_')) continue
+      try {
+        const price = await stripe.prices.retrieve(line.priceId)
+        if (!price.active) continue
+        const qty = Math.max(1, Math.min(20, Number(line.qty) || 1))
+        line_items.push({ price: price.id, quantity: qty })
+      } catch { /* invalid price id — skip */ }
     }
 
     if (line_items.length === 0) {

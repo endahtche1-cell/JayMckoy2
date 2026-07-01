@@ -2,9 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import type { StoreItem } from '@/lib/store'
-
-const gbp = (p?: number) => (p == null ? '' : '£' + (p / 100).toFixed(2).replace(/\.00$/, ''))
+import { money, type StoreItem } from '@/lib/store'
 
 // brand palette — a clean colored accent line per card (nods to the reference)
 const ACCENTS = ['#8C2257', '#6EA3D0', '#1D752C', '#A89FD4', '#29A5F2', '#C61D70']
@@ -12,9 +10,9 @@ const ACCENTS = ['#8C2257', '#6EA3D0', '#1D752C', '#A89FD4', '#29A5F2', '#C61D70
 function priceLabel(item: StoreItem) {
   if (item.sizes?.length) {
     const prices = item.sizes.map(s => s.price).filter((p): p is number => p != null)
-    if (prices.length) return `from ${gbp(Math.min(...prices))}`
+    if (prices.length) return `from ${money(Math.min(...prices), item.currency)}`
   }
-  return gbp(item.price)
+  return money(item.price, item.currency)
 }
 
 type Filter = 'all' | 'print' | 'original'
@@ -66,7 +64,7 @@ export default function StoreGrid({ items }: { items: StoreItem[] }) {
               <div className="sc-accent" style={{ background: ACCENTS[i % ACCENTS.length] }} />
               <div className="sc-imgwrap">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="sc-img" src={item.imageUrl || item.image as string || ''} alt={item.title}
+                <img className="sc-img" src={item.imageUrl || ''} alt={item.title}
                   style={{ opacity: unavailable ? 0.5 : 1 }} />
                 <span style={{ position: 'absolute', top: 10, right: 10, background: '#fff', color: '#12101A',
                   fontSize: 10, fontWeight: 700, padding: '4px 9px', borderRadius: 6, textTransform: 'uppercase',

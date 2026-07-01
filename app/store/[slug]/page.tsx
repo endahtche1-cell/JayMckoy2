@@ -28,7 +28,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '48px', marginTop: '18px', alignItems: 'start' }}>
           <div style={{ borderRadius: '12px', overflow: 'hidden', background: '#fff', border: '1px solid #efe9f2', boxShadow: '0 14px 40px rgba(0,0,0,.12)' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={itemImage(item, 1000)} alt={item.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <img src={itemImage(item)} alt={item.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
 
           <div style={{ paddingTop: '6px' }}>
@@ -48,9 +48,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <AddToCart
               slug={item.slug}
               title={item.title}
-              image={itemImage(item, 800)}
+              image={itemImage(item)}
+              currency={item.currency}
               basePrice={item.price}
-              sizes={item.sizes?.map(s => ({ label: s.label, price: s.price }))}
+              basePriceId={item.stripePriceId}
+              sizes={item.sizes}
               soldOut={soldOut}
             />
 
