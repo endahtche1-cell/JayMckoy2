@@ -75,12 +75,16 @@ const gbp = (p: number, c?: string) => money(p, c)
 
 export function CartButton() {
   const { count, setOpen } = useCart()
+  // Bottom-right floating pill — keeps clear of the nav (hamburger) and the
+  // music player, which both live in the top-right corner.
   return (
     <button onClick={() => setOpen(true)} aria-label="Open cart"
-      style={{ position: 'fixed', top: '18px', right: '18px', zIndex: 70, background: '#8C2257', color: '#fff',
-        border: 'none', borderRadius: '999px', padding: '10px 16px', cursor: 'pointer', fontFamily: 'var(--font-body)',
-        fontWeight: 700, fontSize: '13px', boxShadow: '0 4px 16px rgba(0,0,0,.2)' }}>
-      Cart{count ? ` · ${count}` : ''}
+      style={{ position: 'fixed', bottom: 'calc(20px + env(safe-area-inset-bottom))', right: '18px', zIndex: 70,
+        background: '#8C2257', color: '#fff', border: 'none', borderRadius: '999px', padding: '12px 20px',
+        cursor: 'pointer', fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '14px',
+        boxShadow: '0 6px 20px rgba(140,34,87,.35)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+      <span aria-hidden>🛍</span>
+      <span>Cart{count ? ` · ${count}` : ''}</span>
     </button>
   )
 }
