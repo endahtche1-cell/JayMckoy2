@@ -39,7 +39,8 @@ export default function MusicPlayer() {
           z-index: 60;
         }
         @media (max-width: 767px) {
-          .mp-vinyl-btn { top: 92px; right: 14px; }
+          /* Sit beside the hamburger menu (left of it), not stacked below */
+          .mp-vinyl-btn { top: 26px; right: 80px; }
         }
       `}</style>
 

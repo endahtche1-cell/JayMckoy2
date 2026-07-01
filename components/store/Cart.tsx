@@ -75,16 +75,21 @@ const gbp = (p: number, c?: string) => money(p, c)
 
 export function CartButton() {
   const { count, setOpen } = useCart()
-  // Bottom-right floating pill — keeps clear of the nav (hamburger) and the
-  // music player, which both live in the top-right corner.
+  // Bottom-right floating cart symbol (purple) — keeps clear of the nav +
+  // music player in the top-right corner. Shows the item count beside it.
   return (
-    <button onClick={() => setOpen(true)} aria-label="Open cart"
+    <button onClick={() => setOpen(true)} aria-label={`Open cart${count ? ` (${count})` : ''}`}
       style={{ position: 'fixed', bottom: 'calc(20px + env(safe-area-inset-bottom))', right: '18px', zIndex: 70,
-        background: '#8C2257', color: '#fff', border: 'none', borderRadius: '999px', padding: '12px 20px',
-        cursor: 'pointer', fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '14px',
-        boxShadow: '0 6px 20px rgba(140,34,87,.35)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-      <span aria-hidden>🛍</span>
-      <span>Cart{count ? ` · ${count}` : ''}</span>
+        background: '#fff', border: '1px solid #efdfe9', borderRadius: '999px',
+        padding: count ? '9px 15px 9px 13px' : '11px', cursor: 'pointer',
+        boxShadow: '0 6px 20px rgba(140,34,87,.28)', display: 'inline-flex', alignItems: 'center', gap: '6px',
+        fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '15px', color: '#8C2257' }}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8C2257"
+        strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <circle cx="9" cy="20" r="1.4" /><circle cx="19" cy="20" r="1.4" />
+        <path d="M2.5 3h2.2l2.2 11.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.3L21.5 7H6" />
+      </svg>
+      {count > 0 && <span>{count}</span>}
     </button>
   )
 }
