@@ -5,8 +5,9 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 
-// Gallery and Store hidden until prints are ready (~2 weeks)
+// Gallery hidden until prints are ready (~2 weeks)
 const links = [
+  { href: '/store', label: 'Store' },
   { href: '/commission', label: 'Commission' },
   { href: '/about', label: 'About' },
   { href: '/doodle', label: '★ Studio' },

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getStoreItems, STRIPE_CONFIGURED } from '@/lib/store'
+import { getStoreItems, STRIPE_CONFIGURED, DEMO } from '@/lib/store'
 import StoreGrid from '@/components/store/StoreGrid'
 
 export const metadata: Metadata = { title: 'Store' }
@@ -8,8 +8,13 @@ export const metadata: Metadata = { title: 'Store' }
 // live products (never a stale prerender from an earlier build).
 export const dynamic = 'force-dynamic'
 
-export default async function StorePage() {
-  const items = await getStoreItems().catch(() => [])
+export default async function StorePage({ searchParams }: { searchParams: Promise<{ demo?: string }> }) {
+  const { demo } = await searchParams
+  // ?demo=1 → shareable design preview populated with sample prints (for Jay),
+  // regardless of whether real Stripe products exist yet.
+  const isDemo = demo === '1'
+  const items = isDemo ? DEMO : await getStoreItems().catch(() => [])
+  const showPreviewBanner = isDemo || (!STRIPE_CONFIGURED && items.length > 0)
 
   return (
     <div style={{ position: 'relative', zIndex: 1, minHeight: '70vh', padding: '44px 24px 96px' }}>
@@ -26,9 +31,9 @@ export default async function StorePage() {
           Domestic shipping · allow 1–2 weeks · card &amp; Apple&nbsp;Pay
         </p>
 
-        {!STRIPE_CONFIGURED && items.length > 0 && (
+        {showPreviewBanner && (
           <p style={{ fontFamily: 'var(--font-body)', textAlign: 'center', fontSize: '12px', color: '#b06', background: '#fbeef4', border: '1px solid #f2cfe0', borderRadius: '999px', padding: '7px 16px', width: 'fit-content', margin: '0 auto 30px' }}>
-            ✦ Preview — sample prints until Jay&apos;s real products are added in Stripe
+            ✦ Design preview — sample prints (Jay&apos;s real products replace these)
           </p>
         )}
 

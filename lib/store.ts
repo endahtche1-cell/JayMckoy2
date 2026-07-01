@@ -23,8 +23,8 @@ export type StoreItem = {
 // like "sk_live_xxx" fall through to the demo preview.
 export const STRIPE_CONFIGURED = /^sk_(test|live)_[A-Za-z0-9]{24,}$/.test(process.env.STRIPE_SECRET_KEY || '')
 
-// ── Demo prints (shown only until Jay adds real products in Stripe) ───────────
-const DEMO: StoreItem[] = [
+// ── Demo prints (fallback preview + shareable /store?demo=1 design preview) ────
+export const DEMO: StoreItem[] = [
   { _id: 'demo-1', slug: 'purple-hat', title: 'Purple Hat', type: 'print', status: 'available', currency: 'gbp',
     imageUrl: '/artwork/IMG_6858.jpg', description: 'Giclée print on heavyweight matte paper.', medium: 'Giclée print',
     sizes: [{ label: 'A4', price: 3500 }, { label: 'A3', price: 5500 }, { label: 'A2', price: 8500 }] },
@@ -88,10 +88,13 @@ export async function getStoreItem(slug: string): Promise<StoreItem | null> {
     }
     const products = await stripe.products.list({ active: true, limit: 100 })
     const p = products.data.find(x => (x.metadata?.slug as string) === slug)
-    return p ? toItem(p) : null
+    if (p) return toItem(p)
+    // Not a real product — fall back to a demo item so the design-preview
+    // cards (/store?demo=1) remain clickable. Real products always win above.
+    return DEMO.find(d => d.slug === slug) ?? null
   } catch (e) {
     console.warn('Stripe product fetch failed:', (e as Error).message)
-    return null
+    return DEMO.find(d => d.slug === slug) ?? null
   }
 }
 
