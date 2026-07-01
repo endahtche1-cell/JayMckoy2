@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
-import { getStoreItem, img } from '@/lib/store'
+import { getStoreItem, itemImage } from '@/lib/store'
 
 type InLine = { slug: string; size?: string; qty: number }
 
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       if (stripePriceId) {
         line_items.push({ price: stripePriceId, quantity: qty })
       } else if (price != null) {
-        const image = img(item.image, 800)
+        const image = itemImage(item, 800)
         line_items.push({
           quantity: qty,
           price_data: {
