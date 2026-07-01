@@ -4,7 +4,9 @@ import { getStoreItems, STRIPE_CONFIGURED } from '@/lib/store'
 import StoreGrid from '@/components/store/StoreGrid'
 
 export const metadata: Metadata = { title: 'Store' }
-export const revalidate = 60
+// Render at request time so the store always reflects the current Stripe key +
+// live products (never a stale prerender from an earlier build).
+export const dynamic = 'force-dynamic'
 
 export default async function StorePage() {
   const items = await getStoreItems().catch(() => [])

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { getStoreItem, itemImage } from '@/lib/store'
 import AddToCart from '@/components/store/AddToCart'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
