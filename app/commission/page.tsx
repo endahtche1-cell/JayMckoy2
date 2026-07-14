@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
-import CommissionForm from './CommissionForm'
-import FAQ from './FAQ'
+import Link from 'next/link'
 
 export const metadata: Metadata = { title: 'Commission' }
 
@@ -20,20 +18,35 @@ export default function CommissionPage() {
           style={{ width: 'min(560px, 92%)', height: 'auto', display: 'block', margin: '0 auto', pointerEvents: 'none', position: 'relative', zIndex: 3 }} />
       </div>
 
-      {/* Transparent form section — stars show through */}
-      <div style={{ padding: '56px 24px 80px' }}>
-        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+      {/* Commissions temporarily closed */}
+      <div style={{ padding: '40px 24px 88px' }}>
+        <div style={{ maxWidth: '620px', margin: '0 auto', background: '#fff', border: '2px solid #8C2257', borderRadius: '16px', padding: '40px 30px', textAlign: 'center', fontFamily: 'var(--font-body)' }}>
+          <p style={{ fontSize: '22px', color: '#8C2257', marginBottom: '14px' }}>꒰ა ★ ໒꒱</p>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px, 6vw, 38px)', color: '#12101A', lineHeight: 1.15, marginBottom: '18px' }}>
+            Commissions are taking a little pause
+          </h2>
+          <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.75, marginBottom: '16px' }}>
+            Jay&apos;s commission books are <strong>temporarily closed</strong>. He&apos;s stepping back to
+            focus on some personal things and to give every piece the time and care it deserves.
+          </p>
+          <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.75, marginBottom: '28px' }}>
+            There&apos;s no set reopening date just yet — but this is a pause, not a goodbye. Thank you
+            for your patience and for wanting to work with Jay. 🤍
+          </p>
 
-          {/* Payment notice */}
-          <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', padding: '18px 22px', marginBottom: '48px', background: '#fff', border: '2px solid #1a2ecc', borderRadius: '12px' }}>
-            <span style={{ color: '#1a2ecc', fontSize: '18px', flexShrink: 0, marginTop: '1px' }}>꒰ა ★ ໒꒱</span>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '13.5px', color: '#1a2ecc', lineHeight: 1.6 }}>
-              <strong>Payment in full</strong> is required before work begins. Once Jay reviews your request he will send payment details. Accepts Zelle, Cash App, Venmo, or PayPal.
-            </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
+            <Link href="/store" style={{ background: '#8C2257', color: '#fff', textDecoration: 'none', fontWeight: 700, fontSize: '14px', padding: '12px 22px', borderRadius: '999px' }}>
+              Shop prints
+            </Link>
+            <a href="https://instagram.com/jaymckoyy" target="_blank" rel="noopener noreferrer"
+              style={{ background: 'transparent', color: '#8C2257', textDecoration: 'none', fontWeight: 700, fontSize: '14px', padding: '12px 22px', borderRadius: '999px', border: '1.5px solid #8C2257' }}>
+              Follow for updates
+            </a>
           </div>
 
-          <div style={{ background: '#fff', borderRadius: '16px', padding: '32px 24px', marginBottom: '24px' }}><CommissionForm /></div>
-          <FAQ />
+          <p style={{ fontSize: '12px', color: '#9a90a2', marginTop: '22px', lineHeight: 1.6 }}>
+            Follow <a href="https://instagram.com/jaymckoyy" target="_blank" rel="noopener noreferrer" style={{ color: '#8C2257', fontWeight: 600 }}>@jaymckoyy</a> to hear first when commissions reopen.
+          </p>
         </div>
       </div>
     </div>
