@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { getStoreItems, STRIPE_CONFIGURED, DEMO } from '@/lib/store'
 import StoreGrid from '@/components/store/StoreGrid'
 
@@ -41,7 +40,7 @@ export default async function StorePage({ searchParams }: { searchParams: Promis
           <div style={{ textAlign: 'center', maxWidth: '460px', margin: '40px auto', fontFamily: 'var(--font-body)' }}>
             <p style={{ fontSize: '22px', fontWeight: 700, color: '#8C2257', marginBottom: '10px', fontFamily: 'var(--font-display)' }}>Coming soon.</p>
             <p style={{ color: '#666', lineHeight: 1.7 }}>
-              Prints are on their way. Meanwhile, <Link href="/commission" style={{ color: '#2AA8B0', fontWeight: 600 }}>commission a piece</Link>.
+              Prints are on their way — check back soon.
             </p>
           </div>
         ) : (
