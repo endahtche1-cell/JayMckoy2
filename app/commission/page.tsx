@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = { title: 'Commission' }
 
@@ -35,11 +34,8 @@ export default function CommissionPage() {
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
-            <Link href="/store" style={{ background: '#8C2257', color: '#fff', textDecoration: 'none', fontWeight: 700, fontSize: '14px', padding: '12px 22px', borderRadius: '999px' }}>
-              Shop prints
-            </Link>
             <a href="https://instagram.com/jaymckoyy" target="_blank" rel="noopener noreferrer"
-              style={{ background: 'transparent', color: '#8C2257', textDecoration: 'none', fontWeight: 700, fontSize: '14px', padding: '12px 22px', borderRadius: '999px', border: '1.5px solid #8C2257' }}>
+              style={{ background: '#8C2257', color: '#fff', textDecoration: 'none', fontWeight: 700, fontSize: '14px', padding: '12px 22px', borderRadius: '999px' }}>
               Follow for updates
             </a>
           </div>
